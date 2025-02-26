@@ -2177,7 +2177,7 @@ end
 
 elseif game.PlaceId == 9020359053 or game.PlaceId == 9412268818 then
                 
-                local Window = OrionLib:MakeWindow({Name = "Slap Battles hub that exists | Testing Server", HidePremium = true, IntroEnabled = false, SaveConfig = false, ConfigFolder = "OrionTest"})
+                local Window = OrionLib:MakeWindow({Name = "💥GabTv : Slap Battle💥 | Testing Server", HidePremium = true, IntroEnabled = false, SaveConfig = false, ConfigFolder = "OrionTest"})
 
                 local Tab = Window:MakeTab({
                     Name = "Home",
