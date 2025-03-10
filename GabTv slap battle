@@ -1294,12 +1294,6 @@ block.Parent = game.Workspace
   	end    
 })
 Tab3:AddButton({
-	Name = "Anti Knock off v2",
-	Callback = function()
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/DonjoScripts/Public-Scripts/refs/heads/Slap-Battles/schlob-matstery.lua'),true))()
-  	end    
-})
-Tab3:AddButton({
 	Name = "Anti Acid lake",
 	Callback = function()
 local AntiAcid = Instance.new("Part", workspace)
