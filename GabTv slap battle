@@ -1830,6 +1830,13 @@ loadstring(game:HttpGet("https://pastebin.com/raw/zunzW34R"))()
       		print("Boxer slap farm Activated")
   	end    
 })
+Tab8:AddButton({
+	Name = "Mace slap farm",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/IncognitoScripts/SlapBattles/refs/heads/main/SlapFarmMace'))()
+      		print("Boxer slap farm Activated")
+  	end    
+})
 local Tab9 = Window:MakeTab({
 	Name = "🕹️Player",
 	Icon = "rbxassetid://8834748103",
