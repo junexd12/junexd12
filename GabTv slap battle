@@ -1648,6 +1648,12 @@ Tab6:AddButton({
 loadstring(game:HttpGet("https://raw.githubusercontent.com/0-BaconScripter-0/Script/refs/heads/main/Slap%20Battles/Mastery%20Farm"))()
   	end    
 })
+Tab6:AddButton({
+	Name = "Sans script by incognito im she/him big fan",
+	Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/IncognitoScripts/SlapBattles/refs/heads/main/SansGlove"))()
+  	end    
+})
 
 
 local Tab7 = Window:MakeTab({
