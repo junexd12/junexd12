@@ -1645,7 +1645,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/0-BaconScripter-0/Scr
 Tab6:AddButton({
 	Name = "Sans script by incognito im she/him big fan",
 	Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/IncognitoScripts/SlapBattles/refs/heads/main/SansGlove"))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/IncognitoScripts/SlapBattles/refs/heads/main/SansGloveFinished'))()
   	end    
 })
 
