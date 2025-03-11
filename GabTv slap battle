@@ -1838,7 +1838,7 @@ Tab9:AddButton({
       		print("Castle Island  activated")
   	end    
 })
-Tab4:AddButton({
+Tab9:AddButton({
 	Name = "Doors demension",
 	Callback = function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-87.8 , -28153.41, -0.62)
