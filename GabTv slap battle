@@ -68,7 +68,7 @@ local Tab2 = Window:MakeTab({
 	PremiumOnly = false
 })
 Tab2:AddToggle({
-	Name = "Slap Aura 1",
+	Name = "Slap Aura -1",
 	Default = false,
 	Callback = function(state)
 SlapAura = state
@@ -78,17 +78,44 @@ for i,v in pairs(game.Players:GetChildren()) do
 if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("HumanoidRootPart") then
 Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
                         if 25 >= Magnitude then
-game.ReplicatedStorage.JetHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.ShardHIT:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.CULTHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.bobhit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.buddiesHIT:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.CelestialHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.SpyHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.DetonatorHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.GRRRR:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.traphi:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.HybridCLAP:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.Speedrunhit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.MailHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.DiamondHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.GoldenHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.ReaperHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.DefenseHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.ReverseHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.ShukuchiHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.DuelistHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.woahHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.hitAdios:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.BlockedHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.engiehit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.RockyHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.ConvHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.STOP:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.CustomHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.PhantomHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.WormHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+                    end
+end
+end
+                end
+task.wait(0.95)
+end
+end
+                })
+Tab2:AddToggle({
+	Name = "Slap Aura 0",
+	Default = false,
+	Callback = function(state)
+SlapAura = state
+                while SlapAura do
+for i,v in pairs(game.Players:GetChildren()) do
+                    if v ~= game.Players.LocalPlayer and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and v.Character then
+if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("HumanoidRootPart") then
+Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+                        if 25 >= Magnitude then
 game.ReplicatedStorage.SlappleHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.DisarmH:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.DominanceHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
@@ -110,6 +137,36 @@ game.ReplicatedStorage.PhaseH:FireServer(v.Character:WaitForChild("HumanoidRootP
 game.ReplicatedStorage.WarpHt:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.BombHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.BubbleHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+                    end
+end
+end
+                end
+task.wait(0.95)
+end
+end
+                })
+Tab2:AddToggle({
+	Name = "Slap Aura 1",
+	Default = false,
+	Callback = function(state)
+SlapAura = state
+                while SlapAura do
+for i,v in pairs(game.Players:GetChildren()) do
+                    if v ~= game.Players.LocalPlayer and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and v.Character then
+if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("HumanoidRootPart") then
+Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+                        if 25 >= Magnitude then
+game.ReplicatedStorage.JetHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.ShardHIT:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.CULTHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.bobhit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.buddiesHIT:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.CelestialHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.SpyHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.DetonatorHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.GRRRR:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.traphi:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.HybridCLAP:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
                     end
 end
 end
@@ -143,25 +200,6 @@ game.ReplicatedStorage.PusherHit:FireServer(v.Character:WaitForChild("HumanoidRo
 game.ReplicatedStorage.hitAnchor:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.HtSpace:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.BoomerangH:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.Speedrunhit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.MailHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.DiamondHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.GoldenHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.ReaperHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.DefenseHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.ReverseHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.ShukuchiHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.DuelistHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.woahHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.hitAdios:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.BlockedHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.engiehit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.RockyHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.ConvHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.STOP:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.CustomHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.PhantomHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.WormHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
                     end
 end
 end
