@@ -186,14 +186,13 @@ for i,v in pairs(game.Players:GetChildren()) do
 if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("HumanoidRootPart") then
 Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
                         if 25 >= Magnitude then
-game.ReplicatedStorage.PullHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.FlashHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.springhit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.HitSwapper:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.GhostHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.ThanosHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.DiceHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.zhramt:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.FlashHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.springhit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.PullHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.Fort:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.MagnetHIT:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.PusherHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
