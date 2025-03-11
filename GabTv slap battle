@@ -199,6 +199,7 @@ game.ReplicatedStorage.Godshand:FireServer(v.Character:WaitForChild("HumanoidRoo
 game.ReplicatedStorage.BrickHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.DiamondHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.ZZZZZZZHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.spinhit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
                     end
 end
 end
