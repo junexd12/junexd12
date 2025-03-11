@@ -1328,28 +1328,6 @@ Tab4:AddButton({
 loadstring(game:HttpGet("https://rawscripts.net/raw/Slap-Battles-ULTIMATE-BOXER-19980"))()
   	end    
 })
-Tab4:AddTextbox({
-	Name = "Change NameTag",
-	Default = "",
-	TextDisappear = true,
-	Callback = function(Value)
-		AutoChangeNameTag = Value
-        if AutoChangeNameTag == true and game.Players.LocalPlayer.Character:FindFirstChild("Nametag",true) then
-        game.Players.LocalPlayer.Character.Head.Nametag.TextLabel.Text = workspace.NametagChanged.Value
-end
-workspace.NametagChanged.Changed:Connect(function()
-        if AutoChangeNameTag == true and game.Players.LocalPlayer.Character:FindFirstChild("Nametag",true) then
-        game.Players.LocalPlayer.Character.Head.Nametag.TextLabel.Text = workspace.NametagChanged.Value
-end
-end)
-            game.Players.LocalPlayer.CharacterAdded:Connect(function()
-                if AutoChangeNameTag == true then
-repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("Nametag",true)
-                game.Players.LocalPlayer.Character.Head.Nametag.TextLabel.Text = workspace.NametagChanged.Value
-                end
-            end)
-	end	  
-})
 Tab4:AddToggle({
 	Name = "nonametag mode",
 	Default = false,
@@ -1364,77 +1342,7 @@ getgenv().removenametag = state
         end
 	end    
 })
-Tab4:AddLabel("Teleportation")
-Tab4:AddButton({
-	Name = "Spawn",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-798.47345, 329.357147, 0.84058404, -0.791819096, -2.52048302e-08, -0.610755682, -2.72838037e-08, 1, -5.89596372e-09, 0.610755682, 1.19952013e-08, -0.791819096)
-      		print("Spawn  activated")
-  	end    
-})
-Tab4:AddButton({
-	Name = "Slapples Island",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.island5.Union.CFrame
-      		print("Slapples Island  activated")
-  	end    
-})
-Tab4:AddButton({
-	Name = "Moai Island",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(200,-4,0)
-      		print("Moai Island  activated")
-  	end    
-})
-Tab4:AddButton({
-	Name = "Plate",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.Plate.CFrame
-      		print("Plate  activated")
-  	end    
-})
-Tab4:AddButton({
-	Name = "Battle Arena",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Battlearena.Arena.CFrame * CFrame.new(0,10,0)
-      		print("Battle Arena  activated")
-  	end    
-})
-Tab4:AddButton({
-	Name = "Normal Arena",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-15.3642788, -3.69053721, -7.41954088, 0.405183077, -0.00669269683, -0.914211094, -1.2553046e-05, 0.999973178, -0.00732610561, 0.914235532, 0.00297989813, 0.40517211)
-      		print("Normal Arena  activated")
-  	end    
-})
-Tab4:AddButton({
-	Name = "defualt Arena",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(120,364,-3)
-      		print("defualt Arena  activated")
-  	end    
-})
-Tab4:AddButton({
-	Name = "Hitman",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(17894.6855, -130.158478, -3539.8374, -0.993310213, -4.15437862e-09, 0.11547628, -4.47561899e-09, 1, -2.52259036e-09, -0.11547628, -3.02254266e-09, -0.993310213)
-      		print("Hitman  activated")
-  	end    
-})
-Tab4:AddButton({
-	Name = "Castle Island",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(257.620972, 35.9974861, 198.8535, 0.788386106, 0.045268368, -0.613512933, -8.81827944e-09, 0.997288942, 0.0735854656, 0.615180731, -0.0580137558, 0.786248744)
-      		print("Castle Island  activated")
-  	end    
-})
-Tab4:AddButton({
-	Name = "Doors demension",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-87.8 , -28153.41, -0.62)
-      		print("Doors demension  activated")
-  	end    
-})
+
 
 
 
@@ -1862,7 +1770,78 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/IncognitoScripts/Slap
   	end    
 })
 local Tab9 = Window:MakeTab({
-	Name = "🕹️Player",
+	Name = "🕹️Teleportation",
 	Icon = "rbxassetid://8834748103",
 	PremiumOnly = false
+})
+Tab9:AddLabel("Teleportation")
+Tab9:AddButton({
+	Name = "Spawn",
+	Callback = function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-798.47345, 329.357147, 0.84058404, -0.791819096, -2.52048302e-08, -0.610755682, -2.72838037e-08, 1, -5.89596372e-09, 0.610755682, 1.19952013e-08, -0.791819096)
+      		print("Spawn  activated")
+  	end    
+})
+Tab9:AddButton({
+	Name = "Slapples Island",
+	Callback = function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.island5.Union.CFrame
+      		print("Slapples Island  activated")
+  	end    
+})
+Tab9:AddButton({
+	Name = "Moai Island",
+	Callback = function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(200,-4,0)
+      		print("Moai Island  activated")
+  	end    
+})
+Tab9:AddButton({
+	Name = "Plate",
+	Callback = function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.Plate.CFrame
+      		print("Plate  activated")
+  	end    
+})
+Tab9:AddButton({
+	Name = "Battle Arena",
+	Callback = function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Battlearena.Arena.CFrame * CFrame.new(0,10,0)
+      		print("Battle Arena  activated")
+  	end    
+})
+Tab9:AddButton({
+	Name = "Normal Arena",
+	Callback = function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-15.3642788, -3.69053721, -7.41954088, 0.405183077, -0.00669269683, -0.914211094, -1.2553046e-05, 0.999973178, -0.00732610561, 0.914235532, 0.00297989813, 0.40517211)
+      		print("Normal Arena  activated")
+  	end    
+})
+Tab9:AddButton({
+	Name = "defualt Arena",
+	Callback = function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(120,364,-3)
+      		print("defualt Arena  activated")
+  	end    
+})
+Tab9:AddButton({
+	Name = "Hitman",
+	Callback = function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(17894.6855, -130.158478, -3539.8374, -0.993310213, -4.15437862e-09, 0.11547628, -4.47561899e-09, 1, -2.52259036e-09, -0.11547628, -3.02254266e-09, -0.993310213)
+      		print("Hitman  activated")
+  	end    
+})
+Tab9:AddButton({
+	Name = "Castle Island",
+	Callback = function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(257.620972, 35.9974861, 198.8535, 0.788386106, 0.045268368, -0.613512933, -8.81827944e-09, 0.997288942, 0.0735854656, 0.615180731, -0.0580137558, 0.786248744)
+      		print("Castle Island  activated")
+  	end    
+})
+Tab4:AddButton({
+	Name = "Doors demension",
+	Callback = function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-87.8 , -28153.41, -0.62)
+      		print("Doors demension  activated")
+  	end    
 })
