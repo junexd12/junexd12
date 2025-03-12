@@ -87,5 +87,3 @@ end
 end
 
 game.Players.LocalPlayer.Character.Humanoid.Health = 0
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/junexd12/junexd12/refs/heads/main/Anti%20Slap%20v2"))()
