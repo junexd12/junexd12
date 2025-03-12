@@ -26,11 +26,34 @@ Tab:AddButton({
       		loadstring(game:HttpGet("https://raw.githubusercontent.com/junexd12/junexd12/refs/heads/main/Premium%20Fly%20gui"))()
   	end    
 })
-Tab:AddButton({
-	Name = "🎯HitBox",
-	Callback = function()
-      		loadstring(game:HttpGet("https://pastebin.com/raw/WccNFpJk"))()
-  	end    
+Tab:AddSlider({
+	Name = "Hitbox",
+	Min = -10,
+	Max = 100,
+	Default = -10000,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "🎯HitBox",
+	Callback = function(s)
+_G.HeadSize = s
+_G.Disabled = true
+ 
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.7
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really red")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+	end    
 })
 Tab:AddButton({
 	Name = "🚧bypass anti cheat",
