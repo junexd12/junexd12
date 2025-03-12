@@ -187,16 +187,6 @@ if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("Humanoi
 Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
                         if 25 >= Magnitude then
 game.ReplicatedStorage.GhostHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.ThanosHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.FlashHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.springhit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.PullHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.Fort:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.MagnetHIT:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.PusherHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.hitAnchor:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.HtSpace:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
-game.ReplicatedStorage.BoomerangH:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
                     end
 end
 end
@@ -770,259 +760,6 @@ local Tab3 = Window:MakeTab({
 	PremiumOnly = false
 })
 Tab3:AddToggle({
-	Name = "Anti knock off",
-	Default = false,
-	Callback = function(state)
-getgenv().Antiknokoffsb = state
-    while getgenv().Antiknokoffsb do
-    if game.Workspace.CurrentCamera and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and game.Workspace.CurrentCamera.CameraSubject ~= game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and game.Workspace.CurrentCamera.CameraSubject == game.Workspace:FindFirstChild(game.Players.LocalPlayer.Name.."'s_falsehead") then
-    game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-    end
-    task.wait(0.01)
-    end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti freeze",
-	Default = false,
-	Callback = function(state)
-getgenv().antiicesb = state
-        while getgenv().antiicesb do
-            for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-                    if v.Name == "Icecube" then
-                    v:Destroy()
-                    game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
-                    game.Players.LocalPlayer.Character.Humanoid.AutoRotate = true
-                end
-            end
-        task.wait(0.01)
-        end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti timestop + no stun",
-	Default = false,
-	Callback = function(Value)
-AntiTimestop = Value
-while AntiTimestop do
-                for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-                    if v.ClassName == "Part" then
-                        v.Anchored = false
-                    end
-                end
-task.wait()
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti brick",
-	Default = false,
-	Callback = function(Value)
-AntiBrick = Value
-while AntiBrick do
-for i,v in pairs(game.Workspace:GetChildren()) do
-                    if v.Name == "Union" then
-                        v.CanTouch = false
-                    end
-                end
-task.wait(0.01)
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti Squid | black ink",
-	Default = false,
-	Callback = function(Value)
-AntiSquid = Value
-if AntiSquid == false then
-        game.Players.LocalPlayer.PlayerGui.SquidInk.Enabled = true
-        end
-while AntiSquid do
-if game.Players.LocalPlayer.PlayerGui:FindFirstChild("SquidInk") then
-        game.Players.LocalPlayer.PlayerGui.SquidInk.Enabled = false
-end
-task.wait(0.01)
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti Null",
-	Default = false,
-	Callback = function(Value)
-AntiNull = Value
-while AntiNull do
-for i,v in pairs(game.Workspace:GetChildren()) do
-                    if v.Name == "Imp" and v:FindFirstChild("Body") then
-shared.gloveHits[game.Players.LocalPlayer.leaderstats.Glove.Value]:FireServer(v.Body,true)
-end
-end
-task.wait(0.01)
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti booster | effect",
-	Default = false,
-	Callback = function(Value)
-AntiBooster = Value
-while AntiBooster do
-for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                    if v.Name == "BoosterObject" then
-                        v:Destroy()
-                    end
-                end
-task.wait(0.01)
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti Pusher",
-	Default = false,
-	Callback = function(Value)
-AntiPusher = Value
-            while AntiPusher do
-for i,v in pairs(game.Workspace:GetChildren()) do
-                    if v.Name == "wall" then
-                        v.CanCollide = false
-                    end
-                end
-task.wait(0.01)
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti Custom | megarock",
-	Default = false,
-	Callback = function(Value)
-AntiRock = Value
-while AntiRock do
-for i,v in pairs(game.Workspace:GetDescendants()) do
-                    if v.Name == "rock" then
-                        v.CanTouch = false
-                        v.CanQuery = false
-                    end
-                end
-task.wait(0.1)
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti Reaper | effect",
-	Default = false,
-	Callback = function(Value)
-AntiReaper = Value
-            while AntiReaper do
-for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                    if v.Name == "DeathMark" then
-                        game:GetService("ReplicatedStorage").ReaperGone:FireServer(v)
-                    game:GetService("Lighting"):WaitForChild("DeathMarkColorCorrection"):Destroy() 
-                    end
-                end
-task.wait(0.01)
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti Stun | glove",
-	Default = false,
-	Callback = function(Value)
-AntiStun = Value
-while AntiStun do
-if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Workspace:FindFirstChild("Shockwave") and game.Players.LocalPlayer.Character.Ragdolled.Value == false then
-game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
-end
-task.wait(0.01)
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti Mail",
-	Default = false,
-	Callback = function(Value)
-game.Players.LocalPlayer.Character.YouHaveGotMail.Disabled = Value
-AntiMail = Value
-while AntiMail do
-if game.Players.LocalPlayer.Character:FindFirstChild("YouHaveGotMail") then
-        game.Players.LocalPlayer.Character.YouHaveGotMail.Disabled = true
-end
-task.wait(0.01)
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti demension",
-	Default = false,
-	Callback = function(Value)
-AntiPortal = Value
-if AntiPortal == true then
-workspace.Lobby.Teleport2.CanTouch = false
-workspace.Lobby.Teleport3.CanTouch = false
-workspace.Lobby.Teleport4.CanTouch = false
-workspace.Lobby.Teleport6.CanTouch = false
-else
-workspace.Lobby.Teleport2.CanTouch = true
-workspace.Lobby.Teleport3.CanTouch = true
-workspace.Lobby.Teleport4.CanTouch = true
-workspace.Lobby.Teleport6.CanTouch = true
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti antibrazil",
-	Default = false,
-	Callback = function(Value)
-if Value == true then
-for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
-                        v.CanTouch = false
-                end
-else
-for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
-                        v.CanTouch = true
-                end
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti killwall",
-	Default = false,
-	Callback = function(Value)
-if Value == true then
-for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
-                    if v.ClassName == "Part" and v.Name == "BLOCK" then
-                        v.CanTouch = false
-                    end
-                end
-workspace.DEATHBARRIER.CanTouch = false
-workspace.DEATHBARRIER2.CanTouch = false
-workspace.dedBarrier.CanTouch = false
-workspace.ArenaBarrier.CanTouch = false
-workspace.AntiDefaultArena.CanTouch = false
-else
-for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
-                    if v.ClassName == "Part" and v.Name == "BLOCK" then
-                        v.CanTouch = true
-                    end
-                end
-workspace.DEATHBARRIER.CanTouch = true
-workspace.DEATHBARRIER2.CanTouch = true
-workspace.dedBarrier.CanTouch = true
-workspace.ArenaBarrier.CanTouch = true
-workspace.AntiDefaultArena.CanTouch = true
-end
-	end    
-})
-Tab3:AddToggle({
-	Name = "Anti Kill cube",
-	Default = false,
-	Callback = function(Value)
-if Value == true then
-workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = false
-        else
-workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = true
-        end
-	end    
-})
-Tab3:AddToggle({
 	Name = "Anti kick",
 	Default = false,
 	Callback = function(Value)
@@ -1032,6 +769,20 @@ workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch 
 workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = true
         end
 	end    
+})
+Tab3:AddButton({
+	Name = "Anti Slap",
+	Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/CwytuKgT"))()
+
+task.wait(2)
+
+loadstring(game:HttpGet("https://pastebin.com/raw/HFdzghJU"))()
+
+task.wait(5)
+
+loadstring(game:HttpGet("https://pastebin.com/raw/1DvJk2Mr"))()
+  	end    
 })
 Tab3:AddToggle({
 	Name = "Anti Fling pls execute us two",
@@ -1075,15 +826,6 @@ Tab3:AddButton({
 	Name = "reset force",
 	Callback = function()
 	game.Players.LocalPlayer.Character.Humanoid.Health = 0
-  	end    
-})
-Tab3:AddButton({
-	Name = "Anti Baloon",
-	Callback = function()
-while true do
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PopBalloon"):FireServer()
-wait(0.1)
-end
   	end    
 })
 Tab3:AddButton({
@@ -1331,6 +1073,61 @@ block.Position = Vector3.new(3500, 74.5, 0)
 block.Parent = game.Workspace
   	end    
 })
+Tab3:AddToggle({
+	Name = "Anti antibrazil",
+	Default = false,
+	Callback = function(Value)
+if Value == true then
+for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
+                        v.CanTouch = false
+                end
+else
+for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
+                        v.CanTouch = true
+                end
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti killwall",
+	Default = false,
+	Callback = function(Value)
+if Value == true then
+for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
+                    if v.ClassName == "Part" and v.Name == "BLOCK" then
+                        v.CanTouch = false
+                    end
+                end
+workspace.DEATHBARRIER.CanTouch = false
+workspace.DEATHBARRIER2.CanTouch = false
+workspace.dedBarrier.CanTouch = false
+workspace.ArenaBarrier.CanTouch = false
+workspace.AntiDefaultArena.CanTouch = false
+else
+for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
+                    if v.ClassName == "Part" and v.Name == "BLOCK" then
+                        v.CanTouch = true
+                    end
+                end
+workspace.DEATHBARRIER.CanTouch = true
+workspace.DEATHBARRIER2.CanTouch = true
+workspace.dedBarrier.CanTouch = true
+workspace.ArenaBarrier.CanTouch = true
+workspace.AntiDefaultArena.CanTouch = true
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Kill cube",
+	Default = false,
+	Callback = function(Value)
+if Value == true then
+workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = false
+        else
+workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = true
+        end
+	end    
+})
 Tab3:AddButton({
 	Name = "Anti Acid lake",
 	Callback = function()
@@ -1353,6 +1150,213 @@ AntiLava.Size = Vector3.new(150,30,150)
 AntiLava.Anchored = true
 AntiLava.Transparency = 1
 AntiLava.CanCollide = false
+  	end    
+})
+Tab3:AddToggle({
+	Name = "Anti knock off",
+	Default = false,
+	Callback = function(state)
+getgenv().Antiknokoffsb = state
+    while getgenv().Antiknokoffsb do
+    if game.Workspace.CurrentCamera and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and game.Workspace.CurrentCamera.CameraSubject ~= game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and game.Workspace.CurrentCamera.CameraSubject == game.Workspace:FindFirstChild(game.Players.LocalPlayer.Name.."'s_falsehead") then
+    game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+    end
+    task.wait(0.01)
+    end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti freeze",
+	Default = false,
+	Callback = function(state)
+getgenv().antiicesb = state
+        while getgenv().antiicesb do
+            for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                    if v.Name == "Icecube" then
+                    v:Destroy()
+                    game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+                    game.Players.LocalPlayer.Character.Humanoid.AutoRotate = true
+                end
+            end
+        task.wait(0.01)
+        end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti timestop + no stun",
+	Default = false,
+	Callback = function(Value)
+AntiTimestop = Value
+while AntiTimestop do
+                for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                    if v.ClassName == "Part" then
+                        v.Anchored = false
+                    end
+                end
+task.wait()
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti brick",
+	Default = false,
+	Callback = function(Value)
+AntiBrick = Value
+while AntiBrick do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "Union" then
+                        v.CanTouch = false
+                    end
+                end
+task.wait(0.01)
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Squid | black ink",
+	Default = false,
+	Callback = function(Value)
+AntiSquid = Value
+if AntiSquid == false then
+        game.Players.LocalPlayer.PlayerGui.SquidInk.Enabled = true
+        end
+while AntiSquid do
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("SquidInk") then
+        game.Players.LocalPlayer.PlayerGui.SquidInk.Enabled = false
+end
+task.wait(0.01)
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Null",
+	Default = false,
+	Callback = function(Value)
+AntiNull = Value
+while AntiNull do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "Imp" and v:FindFirstChild("Body") then
+shared.gloveHits[game.Players.LocalPlayer.leaderstats.Glove.Value]:FireServer(v.Body,true)
+end
+end
+task.wait(0.01)
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti booster | effect",
+	Default = false,
+	Callback = function(Value)
+AntiBooster = Value
+while AntiBooster do
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                    if v.Name == "BoosterObject" then
+                        v:Destroy()
+                    end
+                end
+task.wait(0.01)
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Pusher",
+	Default = false,
+	Callback = function(Value)
+AntiPusher = Value
+            while AntiPusher do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "wall" then
+                        v.CanCollide = false
+                    end
+                end
+task.wait(0.01)
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Custom | megarock",
+	Default = false,
+	Callback = function(Value)
+AntiRock = Value
+while AntiRock do
+for i,v in pairs(game.Workspace:GetDescendants()) do
+                    if v.Name == "rock" then
+                        v.CanTouch = false
+                        v.CanQuery = false
+                    end
+                end
+task.wait(0.1)
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Reaper | effect",
+	Default = false,
+	Callback = function(Value)
+AntiReaper = Value
+            while AntiReaper do
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                    if v.Name == "DeathMark" then
+                        game:GetService("ReplicatedStorage").ReaperGone:FireServer(v)
+                    game:GetService("Lighting"):WaitForChild("DeathMarkColorCorrection"):Destroy() 
+                    end
+                end
+task.wait(0.01)
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Stun | glove",
+	Default = false,
+	Callback = function(Value)
+AntiStun = Value
+while AntiStun do
+if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Workspace:FindFirstChild("Shockwave") and game.Players.LocalPlayer.Character.Ragdolled.Value == false then
+game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+end
+task.wait(0.01)
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Mail",
+	Default = false,
+	Callback = function(Value)
+game.Players.LocalPlayer.Character.YouHaveGotMail.Disabled = Value
+AntiMail = Value
+while AntiMail do
+if game.Players.LocalPlayer.Character:FindFirstChild("YouHaveGotMail") then
+        game.Players.LocalPlayer.Character.YouHaveGotMail.Disabled = true
+end
+task.wait(0.01)
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti demension",
+	Default = false,
+	Callback = function(Value)
+AntiPortal = Value
+if AntiPortal == true then
+workspace.Lobby.Teleport2.CanTouch = false
+workspace.Lobby.Teleport3.CanTouch = false
+workspace.Lobby.Teleport4.CanTouch = false
+workspace.Lobby.Teleport6.CanTouch = false
+else
+workspace.Lobby.Teleport2.CanTouch = true
+workspace.Lobby.Teleport3.CanTouch = true
+workspace.Lobby.Teleport4.CanTouch = true
+workspace.Lobby.Teleport6.CanTouch = true
+end
+	end    
+})
+Tab3:AddButton({
+	Name = "Anti Baloon",
+	Callback = function()
+while true do
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PopBalloon"):FireServer()
+wait(0.1)
+end
   	end    
 })
 local Tab4 = Window:MakeTab({
