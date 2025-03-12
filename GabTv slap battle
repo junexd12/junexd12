@@ -1237,6 +1237,14 @@ fireclickdetector(workspace.Lobby.Scene.knofe.ClickDetector)
 fireclickdetector(workspace.Arena.island5.Orange.ClickDetector)
     end    
 })
+Tab5:AddButton({
+	Name = "get Lamp needed zzzzzz..",
+	Callback = function()
+repeat task.wait()
+game:GetService("ReplicatedStorage").nightmare:FireServer("LightBroken")
+until game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer.UserId, 490455814138437)
+    end    
+})
 Tab5:AddLabel("U need God hand and replica to get Rob badge")
 Tab5:AddButton({
 	Name = "get bob",
@@ -1489,6 +1497,21 @@ OrionLib:MakeNotification({Name = "Error",Content = "You need to be in lobby and
 end
   	end    
 })
+Tab7:AddButton({
+	Name = "Sbeve all player",
+	Callback = function()
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Sbeve" or game.Players.LocalPlayer.Character:FindFirstChild("stevebody") then
+for i,v in pairs(game.Players:GetChildren()) do
+         if v ~= game.Players.LocalPlayer and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and v.Character then
+              if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("stevebody") == nil and v.Character:FindFirstChild("rock") == nil and v.Character.Ragdolled.Value == false then
+                 v.Character.HumanoidRootPart.CanCollide = false
+                 v.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.stevebody.CFrame
+              end
+          end
+     end
+ end
+  	end    
+})
 Tab7:AddToggle({
 	Name = "Inf Golden",
 	Default = false,
@@ -1601,6 +1624,22 @@ end
 	end    
 })
 Tab8:AddToggle({
+	Name = "Gift Farm",
+	Default = false,
+	Callback = function(Value)
+Giftfarm = Value
+while Giftfarm do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "Gift" then
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), v, 0)
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), v, 1)
+                    end
+                end
+task.wait()
+end
+	end    
+})
+Tab8:AddToggle({
 	Name = "tycoon farm + get spoonfull",
 	Default = false,
 	Callback = function(Value)
@@ -1675,39 +1714,3 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/IncognitoScripts/Slap
   	end    
 })
 
-Tab9:AddLabel("Teleportation")
-Tab9:AddButton({
-	Name = "Spawn",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-798.47345, 329.357147, 0.84058404, -0.791819096, -2.52048302e-08, -0.610755682, -2.72838037e-08, 1, -5.89596372e-09, 0.610755682, 1.19952013e-08, -0.791819096)
-      		print("Spawn  activated")
-  	end    
-})
-Tab9:AddButton({
-	Name = "Slapples Island",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.island5.Union.CFrame
-      		print("Slapples Island  activated")
-  	end    
-})
-Tab9:AddButton({
-	Name = "Moai Island",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(200,-4,0)
-      		print("Moai Island  activated")
-  	end    
-})
-Tab9:AddButton({
-	Name = "Hitman",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(17894.6855, -130.158478, -3539.8374, -0.993310213, -4.15437862e-09, 0.11547628, -4.47561899e-09, 1, -2.52259036e-09, -0.11547628, -3.02254266e-09, -0.993310213)
-      		print("Hitman  activated")
-  	end    
-})
-Tab9:AddButton({
-	Name = "Castle Island",
-	Callback = function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(257.620972, 35.9974861, 198.8535, 0.788386106, 0.045268368, -0.613512933, -8.81827944e-09, 0.997288942, 0.0735854656, 0.615180731, -0.0580137558, 0.786248744)
-      		print("Castle Island  activated")
-  	end    
-})
