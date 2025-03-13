@@ -1,4 +1,4 @@
- local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/junexd12/junexd12/refs/heads/main/boosting%20library%20remake%20intro')))()
+ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/junexd12/junexd12/refs/heads/main/Orion%20booting%20library')))()
 
  local Window = OrionLib:MakeWindow({Name = "👑Gabtv : premium : Slapbattle👑", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
  
