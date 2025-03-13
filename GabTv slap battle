@@ -1749,6 +1749,22 @@ end
 	end    
 })
 Tab8:AddToggle({
+	Name = "Killstreak Farm",
+	Default = false,
+	Callback = function(state)
+	KillFarm = state
+while KillFarm do
+local players = game.Players:GetChildren()
+            local RandomPlayer = players[math.random(1, #players)]
+            repeat RandomPlayer = players[math.random(1, #players)] until RandomPlayer ~= game.Players.LocalPlayer and RandomPlayer.Character:FindFirstChild("entered") and RandomPlayer.Character:FindFirstChild("Ragdolled").Value == false
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = RandomPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
+            wait(0.3)
+            game.ReplicatedStorage.KSHit:FireServer(RandomPlayer.Character:WaitForChild("HumanoidRootPart"))
+            wait(0.3)
+end
+	end    
+})
+Tab8:AddToggle({
 	Name = "Jet farm",
 	Default = false,
 	Callback = function(Value)
