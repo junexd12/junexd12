@@ -322,7 +322,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Orig
   	end    
 })
 Tab2:AddToggle({
-	Name = "Rhythm Explosion Spam/ all.G",
+	Name = "Rhythm Spam | Rhythm Glove Only",
 	Default = false,
 	Callback = function(Value)
 RhythmSpam = (Value)
@@ -333,7 +333,7 @@ end
 	end
 })
 Tab2:AddToggle({
-	Name = "Null Spam/ all.G",
+	Name = "Null Spam | Null Glove Only",
 	Default = false,
 	Callback = function(Value)
 	NullSpam = Value
@@ -344,7 +344,7 @@ end
      end
 })
 Tab2:AddToggle({
-	Name = "Rojo Spam/ all.G",
+	Name = "Rojo Spam | Rojo Glove Only",
 	Default = false,
 	Callback = function(Value)
 RojoSpam = (Value)
@@ -355,7 +355,32 @@ end
 	end
 })
 Tab2:AddToggle({
-	Name = "Retro Spam/ all.G",
+	Name = "Santa Spam | Santa Glove Only",
+	Default = false,
+	Callback = function(Value)
+SantaSpam = Value
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Santa" then
+while SantaSpam and game.Players.LocalPlayer.leaderstats.Glove.Value == "Santa" do
+game:GetService("ReplicatedStorage").GeneralAbility:FireServer(SantaAbility)
+task.wait()
+end
+elseif SantaSpam == true then
+OrionLib:MakeNotification({Name = "Error",Content = "You don't have Santa equipped.",Image = "rbxassetid://7733658504",Time = 5})
+wait(0.05)
+Santa:Set(false)
+end
+	end
+})
+Tab2:AddDropdown({
+	Name = "Santa Ability",
+	Default = "None",
+	Options = {"milk", "snowpeep", "bobplush"},
+	Callback = function(Value)
+SantaAbility = Value
+	end    
+})
+Tab2:AddToggle({
+	Name = "Retro Spam | All Glove",
 	Default = false,
 	Callback = function(Value)
 RetroSpam = Value
@@ -367,53 +392,64 @@ end
 })
 Tab2:AddDropdown({
 	Name = "Retro Ability",
-	Default = "Ban Hammer",
+	Default = "None",
 	Options = {"Rocket Launcher", "Ban Hammer", "Bomb"},
 	Callback = function(Value)
 RetroAbility = Value
 	end    
 })
-Tab2:AddButton({
-	Name = "Spam Anvil",
-	Callback = function()
-while true do
-local args = {
-    [1] = "Anvil"
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("AdminAbility"):FireServer(unpack(args))
-wait(0.01)
+Tab2:AddToggle({
+	Name = "Admin Spam | All Glove",
+	Default = false,
+	Callback = function(Value)
+AdminSpam = Value
+while AdminSpam do
+game:GetService("ReplicatedStorage").AdminAbility:FireServer(AbilityAdmin)
+task.wait()
 end
-  	end    
+	end
 })
-Tab2:AddButton({
-	Name = "Spam Fling",
-	Callback = function()
-while true do
-local args = {
-    [1] = "Fling"
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("AdminAbility"):FireServer(unpack(args))
-wait(0.01)
-end
-  	end    
-})
-Tab2:AddButton({
-	Name = "Spam Invisiblity",
-	Callback = function()
-while true do
-local args = {
-    [1] = "Invisiblity"
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("AdminAbility"):FireServer(unpack(args))
-wait(0.01)
-end
-  	end    
+Tab2:AddDropdown({
+	Name = "Admin Ability",
+	Default = "None",
+	Options = {"Fling", "Anvil", "Invinsibility"},
+	Callback = function(Value)
+AbilityAdmin = Value
+	end    
 })
 Tab2:AddToggle({
-	Name = "Glove S_S/ work on spawn",
+	Name = "SlapStick Spam | All Glove",
+	Default = false,
+	Callback = function(Value)
+if SlapstickAbility == "runeffect" then
+OldSpeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+game:GetService("ReplicatedStorage").slapstick:FireServer("runeffect")
+wait(5)
+game:GetService("ReplicatedStorage").slapstick:FireServer("fullcharged")
+wait(1)
+OrionLib:MakeNotification({Name = "Error",Content = "Started RUN Now.",Image = "rbxassetid://7733658504",Time = 5})
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 70
+wait(25)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = OldSpeed
+game:GetService("ReplicatedStorage").slapstick:FireServer("cancelrun")
+elseif SlapstickAbility == "dash" then
+game:GetService("ReplicatedStorage").slapstick:FireServer("addarm")
+game:GetService("ReplicatedStorage").slapstick:FireServer("dash")
+end
+	end
+})
+Tab2:AddDropdown({
+	Name = "SkapStick Ability",
+	Default = "None",
+	Options = {"dash", "runeffect", "fullcharged", "charge", "cancelrun", "addarm", "discharge"},
+	Callback = function(Value)
+SlapstickAbility = Value
+	end    
+})
+Tab2:AddToggle({
+	Name = "Glove Ability Spam | Can work on Lobby",
 	Default = false,
 	Callback = function(Value)
 On = Value
@@ -698,7 +734,7 @@ end
 
 Cancel = false
 Tab2:AddTextbox({
-	Name = "Punish player N_.Swapper",
+	Name = "Punish Player | Swapper Only",
 	Default = "Username",
 	TextDisappear = false,
 	Callback = function(Value)
@@ -733,7 +769,7 @@ end
 	end	  
 })
 Tab2:AddTextbox({
-	Name = "G_person Rojo_S",
+	Name = "Give person Rojo Spam",
 	Default = "Username",
 	TextDisappear = false,
 	Callback = function(Value)
@@ -753,7 +789,7 @@ Cancel = false
   	end    
 })
 Tab2:AddToggle({
-	Name = "Auto Spawn/Arena",
+	Name = "Auto Spawn | Arena",
 	Default = false,
 	Callback = function(Value)
 AutoEnterArena = Value
@@ -767,13 +803,13 @@ end
       end
 })
 Tab2:AddToggle({
-	Name = "Kill._.orb_S_.!",
+	Name = "KS Kill Orb Spam",
 	Default = false,
 	Callback = function(Value)
 On = Value
 while On and game.Players.LocalPlayer.leaderstats.Glove.Value == "Killstreak" do
 game:GetService("ReplicatedStorage").KSABILI:FireServer()
-wait(6.1)
+wait(6.2)
 end
                     end   
 })
@@ -1241,7 +1277,147 @@ wait()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = NOW
 	end	  
 })
+Tab4:AddSlider({
+	Name = "WalkSpeed",
+	Min = 20,
+	Max = 1000,
+	Default = 20,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "WalkSpeed",
+	Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+Walkspeed = Value
+	end    
+})
 
+Tab4:AddTextbox({
+	Name = "WalkSpeed",
+	Default = "UserSpeed",
+	TextDisappear = false,
+	Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+Walkspeed = Value
+	end	  
+})
+
+Tab4:AddToggle({
+	Name = "Walkspeed Set Auto",
+	Default = false,
+	Callback = function(Value)
+		KeepWalkspeed = Value
+            while KeepWalkspeed do
+                if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Players.LocalPlayer.Character.Humanoid.WalkSpeed ~= Walkspeed then
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Walkspeed
+                end
+task.wait()
+            end
+	end    
+})
+
+Tab4:AddSlider({
+	Name = "JumpPower",
+	Min = 50,
+	Max = 1000,
+	Default = 50,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "JumpPower",
+	Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+Jumppower = Value
+	end    
+})
+
+Tab4:AddTextbox({
+	Name = "Jumppower",
+	Default = "UserPower",
+	TextDisappear = false,
+	Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+Jumppower = Value
+	end	  
+})
+
+Tab4:AddToggle({
+	Name = "Jumppower Set Auto",
+	Default = false,
+	Callback = function(Value)
+		KeepJumppower = Value
+            while KeepJumppower do
+                if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Players.LocalPlayer.Character.Humanoid.JumpPower ~= Jumppower then
+                    game.Players.LocalPlayer.Character.Humanoid.JumpPower = Jumppower
+                end
+task.wait()
+            end
+	end    
+})
+
+Tab4:AddSlider({
+	Name = "Hip Height",
+	Min = 0,
+	Max = 100,
+	Default = 0,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Hip Height",
+	Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid.HipHeight = Value
+HipHeight = Value
+	end    
+})
+
+Tab4:AddTextbox({
+	Name = "Hip Height",
+	Default = "UserHeight",
+	TextDisappear = false,
+	Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid.HipHeight = Value
+HipHeight = Value
+	end	  
+})
+
+Tab4:AddToggle({
+	Name = "Hip Height Set Auto",
+	Default = false,
+	Callback = function(Value)
+		KeepHipHeight = Value
+           while KeepHipHeight do
+              if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Players.LocalPlayer.Character.Humanoid.HipHeight ~= HipHeight then
+                  game.Players.LocalPlayer.Character.Humanoid.HipHeight  = HipHeight
+              end
+task.wait()
+         end
+	end    
+})
+
+Tab4:AddSlider({
+	Name = "Gravity",
+	Min = 0,
+	Max = 600,
+	Default = 196,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Gravity",
+	Callback = function(Value)
+game.Workspace.Gravity = Value
+Gravity = Value
+	end    
+})
+
+Tab4:AddToggle({
+	Name = "Gravity Set Auto",
+	Default = false,
+	Callback = function(Value)
+		KeepGravity = Value
+           while KeepGravity do
+              if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Workspace.Gravity ~= nil and game.Workspace.Gravity ~= Gravity then
+                  game.Workspace.Gravity = Gravity
+              end
+task.wait()
+         end
+	end    
+})
 
 
 
@@ -1663,7 +1839,7 @@ end
 	end    
 })
 Tab8:AddToggle({
-	Name = "tycoon farm + get spoonfull",
+	Name = "TyCoon Farm",
 	Default = false,
 	Callback = function(Value)
 AutoTycoon = Value
@@ -1683,7 +1859,7 @@ end
 	end    
 })
 Tab8:AddToggle({
-	Name = "slapple farm/on._.Arena",
+	Name = "Slapple Farm | Only Woks On Arena",
 	Default = false,
 	Callback = function(Value)
 SlappleFarm = Value
