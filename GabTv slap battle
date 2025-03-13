@@ -1429,7 +1429,7 @@ local Tab5 = Window:MakeTab({
 Tab5:AddLabel("My side")
 Tab5:AddLabel("The Lone Orange, Court Evidence Badge, Duck")
 Tab5:AddButton({
-	Name = "get badge",
+	Name = "Get Badge",
 	Callback = function()
 fireclickdetector(workspace.Arena["default island"]["Rubber Ducky"].ClickDetector)
 fireclickdetector(workspace.Lobby.Scene.knofe.ClickDetector)
@@ -1437,7 +1437,94 @@ fireclickdetector(workspace.Arena.island5.Orange.ClickDetector)
     end    
 })
 Tab5:AddButton({
-	Name = "get Lamp needed zzzzzz..",
+	Name = "Get Schlop",
+	Callback = function()
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Cloud" and game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer.UserId, 2130032297) and game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.CannonIsland.Cannon.Base.CFrame * CFrame.new(0,2,35)
+wait(0.3)
+game:GetService("ReplicatedStorage").CloudAbility:FireServer()
+fireclickdetector(workspace.Lobby.fish.ClickDetector)
+wait(0.2)
+repeat task.wait() until game.Players.LocalPlayer.Character
+if not game.Players.LocalPlayer.Character:FindFirstChild("entered") and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+repeat task.wait()
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 0)
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 1)
+until game.Players.LocalPlayer.Character:FindFirstChild("entered")
+end
+wait(0.3)
+if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("entered") and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") ~= nil and game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name:match(game.Players.LocalPlayer.Name) and v:FindFirstChild("VehicleSeat") then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.VehicleSeat.CFrame
+                    end
+               end
+          end
+          wait(0.7)
+for _ = 1, 10 do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name:match(game.Players.LocalPlayer.Name) and v:FindFirstChild("VehicleSeat") then
+                        v.VehicleSeat.CFrame = CFrame.new(245, 129, -91)
+                    end
+               end
+task.wait()
+end
+wait(0.4)
+game:GetService("ReplicatedStorage"):WaitForChild("GeneralAbility"):FireServer()
+wait(0.5)
+repeat task.wait()
+if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("entered") then
+for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+if v.ClassName == "Part" and v.Name ~= "Humanoid" then
+v.CFrame = game.workspace.Arena.Plate.CFrame
+end
+end
+end
+until game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Value == false
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You don't have equiped Cloud | Badge Fish | You are in the lobby.",Image = "rbxassetid://7733658504",Time = 5})
+end
+  	end 
+})
+Tab8:AddButton({
+	Name = "Get Blasphemy",
+	Callback = function()
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "bus" and not game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer.UserId, 3335299217032061) then
+OGL = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+repeat
+if game.Players.LocalPlayer.Character.Humanoid.Health == 0 or game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil then
+break
+end
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") then
+local players = game.Players:GetChildren()
+local RandomPlayer = players[math.random(1, #players)]
+repeat RandomPlayer = players[math.random(1, #players)] until RandomPlayer ~= game.Players.LocalPlayer and RandomPlayer.Character:FindFirstChild("rock") == nil and RandomPlayer.Character.Head:FindFirstChild("UnoReverseCard") == nil and RandomPlayer.Character:FindFirstChild("entered")
+Target = RandomPlayer
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Target.Character.HumanoidRootPart.CFrame
+task.wait(0.34)
+game:GetService("ReplicatedStorage").busmoment:FireServer()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
+wait(1.5)
+game.ReplicatedStorage.SelfKnockback:FireServer({["Force"] = 0,["Direction"] = Vector3.new(0,0.01,0)})
+wait(0.8)
+for i = 1,50 do
+for i,v in pairs(game.Workspace:GetChildren()) do
+if v.Name == "BusModel" then
+v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+end
+end
+task.wait()
+end
+end
+task.wait(3.5)
+until game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer.UserId, 3335299217032061)
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You don't have bus equipped, or you have owner badge",Image = "rbxassetid://7733658504",Time = 5})
+end
+  	end    
+})
+Tab5:AddButton({
+	Name = "Get Lamp Needed Zzzzzz..",
 	Callback = function()
 repeat task.wait()
 game:GetService("ReplicatedStorage").nightmare:FireServer("LightBroken")
@@ -1446,13 +1533,13 @@ until game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer
 })
 Tab5:AddLabel("U need God hand and replica to get Rob badge")
 Tab5:AddButton({
-	Name = "get bob",
+	Name = "Get Bob",
 	Callback = function()
 loadstring(game:HttpGet("https://pastebin.com/raw/kYx1gwpv"))()
     end    
 })
 Tab5:AddButton({
-	Name = "get plank glove",
+	Name = "Get Plank Glove",
 	Callback = function()
 if game.Players.LocalPlayer.leaderstats.Glove.Value == "Fort" then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8, 97, 4)
@@ -1470,7 +1557,7 @@ if game.Players.LocalPlayer.leaderstats.Glove.Value == "Fort" then
 	end    
 })
 Tab5:AddButton({
-	Name = "get elude",
+	Name = "Get Elude",
 	Callback = function()
 local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
 if teleportFunc then
@@ -1489,7 +1576,7 @@ game:GetService("TeleportService"):Teleport(11828384869)
   	end    
 })
 Tab5:AddButton({
-	Name = "get tycoon",
+	Name = "Get Tycoon",
 	Callback = function()
 repeat task.wait()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Arena.Plate.CFrame * CFrame.new(0,-2,0) * CFrame.Angles(math.rad(90), math.rad(0), math.rad(0))
@@ -1497,7 +1584,7 @@ until game.Players.LocalPlayer.PlayerGui.PlateIndicator.TextLabel.Text == "Plate
        end    
 })
 Tab5:AddButton({
-	Name = "get trap take to long srry",
+	Name = "Get Trap Glove Wait Till 1,200",
 	Callback = function()
 if game.Players.LocalPlayer.leaderstats.Glove.Value == "Brick" then
 for i = 1, 200 do
@@ -1522,13 +1609,13 @@ end
        end    
 })
 Tab5:AddButton({
-	Name = "get Brazil | Portal",
+	Name = "Get Brazil | Portal",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Lobby.brazil.portal.CFrame
        end    
 })
 Tab5:AddButton({
-	Name = "get kinetic | Glove",
+	Name = "Get Kinetic | Glove",
 	Callback = function()
 if game.Players.LocalPlayer.leaderstats.Glove.Value == "Stun" then
 OGL = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
@@ -1554,13 +1641,13 @@ end
        end    
 })
 Tab5:AddButton({
-	Name = "get Chain | Glove",
+	Name = "Get Chain | Glove",
 	Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/AutoGetPoltergeist/main/main.lua'))()
        end    
 })
 Tab5:AddButton({
-	Name = "get Redacted | Glove",
+	Name = "Get Redacted | Glove",
 	Callback = function()
 if game.Players.LocalPlayer.leaderstats.Slaps.Value >= 5000 then
 Door = 0
@@ -1579,13 +1666,13 @@ OrionLib:MakeNotification({Name = "Error",Content = "You need 5k slaps.",Image =
        end    
 })
 Tab5:AddButton({
-	Name = "get poltergeist | Glove",
+	Name = "Get Poltergeist | Glove",
 	Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/AutoGetPoltergeist/main/main.lua'))()
        end    
 })
 Tab5:AddButton({
-	Name = "get bomb | Glove",
+	Name = "Get Bomb | Glove",
 	Callback = function()
 if game.Players.LocalPlayer.leaderstats.Glove.Value == "Warp" and game.Players.LocalPlayer.Character:FindFirstChild("entered") then
             local players = game.Players:GetChildren()
@@ -1605,19 +1692,19 @@ if game.Players.LocalPlayer.leaderstats.Glove.Value == "Warp" and game.Players.L
 })
 Tab5:AddLabel("Nexer side")
 Tab5:AddButton({
-	Name = "get Fan + boxer | Glove",
+	Name = "Get Fan + boxer | Glove",
 	Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/autogetfanboxer/main/main.lua'))()
        end    
 })
 Tab5:AddButton({
-	Name = "get hexagon | Glove",
+	Name = "Get Hexagon | Glove",
 	Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/AutoGetHexagon/refs/heads/main/OpenSource.lua'))()
        end    
 })
 Tab5:AddButton({
-	Name = "get Mouse | Glove",
+	Name = "Get Mouse | Glove",
 	Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/AutoGetMouse/refs/heads/main/OpenSource.lua'))()
        end    
@@ -1839,6 +1926,61 @@ end
 	end    
 })
 Tab8:AddToggle({
+	Name = "ToolBox Farm",
+	Default = false,
+	Callback = function(Value)
+Toolboxfarm = Value
+while Toolboxfarm do
+if game.Workspace:FindFirstChild("Toolbox") then
+for i,v in pairs(game.Workspace:GetDescendants()) do
+                    if v.Name == "Toolbox" and v:FindFirstChild("ClickDetector") then
+fireclickdetector(v.ClickDetector, 0)
+fireclickdetector(v.ClickDetector, 1)
+                    end
+                end
+            end
+task.wait()
+end
+	end    
+})
+Tab8:AddToggle({
+	Name = "Siphon Orb Farm",
+	Default = false,
+	Callback = function(Value)
+_G.Siphonfarm = Value
+while _G.Siphonfarm do
+if game.Workspace:FindFirstChild("SiphonOrb") then
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "SiphonOrb" then
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), v, 0)
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), v, 1)
+                    end
+                end
+                end
+task.wait()
+end
+	end    
+})
+Tab8:AddToggle({
+	Name = "Glitch Farm",
+	Default = false,
+	Callback = function(Value)
+_G.Glitchfarm = Value
+while _G.Glitchfarm do
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Error" then
+if game.Workspace:FindFirstChild("JetOrb") or game.Workspace:FindFirstChild("PhaseOrb") then
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "JetOrb" or v.Name == "PhaseOrb" then
+game.ReplicatedStorage.Errorhit:FireServer(v)
+                    end
+                end
+            end
+        end
+task.wait()
+end
+	end    
+})
+Tab8:AddToggle({
 	Name = "TyCoon Farm",
 	Default = false,
 	Callback = function(Value)
@@ -1858,6 +2000,319 @@ while AutoTycoon do
 end
 	end    
 })
+Tab8:AddDropdown({
+	Name = "Time Farm",
+	Default = "",
+	Options = {"Voodoo + Fish", "MegaRock"},
+	Callback = function(Value)
+AutoTime = Value
+	end    
+})
+
+FarmTimeServer = Tab8:AddLabel("Farm Time [ 0 ]")
+
+GetFarmTime = Tab3:AddToggle({
+	Name = "Time Farm Toggle",
+	Default = false,
+	Callback = function(Value)
+_G.AutoTimeGet = Value
+if AutoTime == "Voodoo + Fish" then
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Ghost" and game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil then
+game.ReplicatedStorage.Ghostinvisibilityactivated:FireServer()
+fireclickdetector(workspace.Lobby["ZZZZZZZ"].ClickDetector)
+wait(0.2)
+repeat task.wait() until game.Players.LocalPlayer.Character
+if not game.Players.LocalPlayer.Character:FindFirstChild("entered") and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+repeat task.wait()
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 0)
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 1)
+until game.Players.LocalPlayer.Character:FindFirstChild("entered")
+end
+wait(0.2)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["SafeBox"].CFrame * CFrame.new(0,5,0)
+wait(0.2)
+game:GetService("ReplicatedStorage").ZZZZZZZSleep:FireServer()
+elseif _G.AutoTimeGet == true then
+OrionLib:MakeNotification({Name = "Error",Content = "You don't have Ghost equipped, or You have go to lobby",Image = "rbxassetid://7733658504",Time = 5})
+end
+elseif AutoTime ~= "Voodoo + Fish" or Value == false then
+SleepTimeandTimeGhost = 0
+FarmTimeServer:Set("Farm Time [ 0 ]")
+end
+while _G.AutoTimeGet and AutoTime == "Voodoo + Fish" and task.wait() do
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "ZZZZZZZ" and game.Players.LocalPlayer.Character:FindFirstChild("entered") and game.Players.LocalPlayer.Character:FindFirstChild("Ragdolled").Value == true then
+task.wait(1)
+SleepTimeandTimeGhost += 1
+FarmTimeServer:Set("Farm Time [ "..SleepTimeandTimeGhost.." ]")
+elseif game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil or game.Players.LocalPlayer.Character:FindFirstChild("Ragdolled").Value == false then
+SleepTimeandTimeGhost = 0
+FarmTimeServer:Set("Farm Time [ 0 ]")
+end
+end
+if AutoTime == "MegaRock" then
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") and game.Players.LocalPlayer.leaderstats.Glove.Value == "Diamond" then
+game:GetService("ReplicatedStorage"):WaitForChild("Rockmode"):FireServer()
+end
+elseif AutoTime ~= "MegaRock" or Value == false then
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Diamond" and game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil or game.Players.LocalPlayer.Character:FindFirstChild("rock") ~= nil then
+game:GetService("ReplicatedStorage"):WaitForChild("Rockmode"):FireServer()
+TimeMegarock = 0
+FarmTimeServer:Set("Farm Time [ 0 ]")
+end
+end
+while _G.AutoTimeGet and AutoTime == "MegaRock" and task.wait() do
+task.wait(1)
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Diamond" and game.Players.LocalPlayer.Character:FindFirstChild("entered") and game.Players.LocalPlayer.Character:FindFirstChild("rock") then
+TimeMegarock += 1
+FarmTimeServer:Set("Farm Time [ "..TimeMegarock.." ]")
+elseif game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil or game.Players.LocalPlayer.Character:FindFirstChild("rock") == nil then
+TimeMegarock = 0
+FarmTimeServer:Set("Farm Time [ 0 ]")
+end
+end
+	end    
+})
+Tab8:AddDropdown({
+	Name = "Bob Farm",
+	Default = "Slow",
+	Options = {"Auto Spawn E", "Auto Spawn", "Fast Spawn", "Normal","Super Fast Spawn"},
+	Callback = function(Value)
+Autobob = Value
+	end    
+})
+
+GetBob = Tab8:AddToggle({
+	Name = "Bob Farm Toggle",
+	Default = false,
+	Callback = function(Value)
+_G.AutoFarmBob = Value
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Replica" then
+while _G.AutoFarmBob and Autobob == "Auto Spawn E" do
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") or game.Workspace:FindFirstChild("bobcap") == nil then
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,x)
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You got Bob spawn",Image = "rbxassetid://7733658504",Time = 5})
+GetBob:Set(false)
+end
+task.wait(0.5)
+end
+while _G.AutoFarmBob and Autobob == "Auto Spawn" do
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") or game.Workspace:FindFirstChild("bobcap") == nil then
+game.ReplicatedStorage.Duplicate:FireServer(true)
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You got Bob spawn",Image = "rbxassetid://7733658504",Time = 5})
+GetBob:Set(false)
+end
+task.wait(5.3)
+end
+while _G.AutoFarmBob and Autobob == "Fast Spawn" do
+repeat task.wait() until game.Players.LocalPlayer.Character
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+repeat task.wait()
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 0)
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 1)
+until game.Players.LocalPlayer.Character:FindFirstChild("entered") and game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool")
+task.wait(0.5)
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,x)
+if game.Workspace:FindFirstChild("bobcap") == nil then
+game:GetService("ReplicatedStorage"):WaitForChild("HumanoidDied"):FireServer(game.Players.LocalPlayer.Character,false)
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You got Bob spawn",Image = "rbxassetid://7733658504",Time = 5})
+GetBob:Set(false)
+end
+end
+task.wait()
+end
+while _G.AutoFarmBob and Autobob == "Normal" do
+if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and game.Players.LocalPlayer.Character.Humanoid.RootPart and game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil then
+for i,v in pairs(game.Workspace.Lobby:GetChildren()) do
+if v.Name == "Teleport1" and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
+game.Players.LocalPlayer.Character.Humanoid.WalkToPoint = v.Position
+end
+end
+end
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") then
+game.Players.LocalPlayer.Character.Humanoid.WalkToPoint = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+task.wait(0.2)
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,x)
+if game.Workspace:FindFirstChild("bobcap") == nil then
+if game.Players.LocalPlayer.Character.Humanoid.Health == 100 then
+game:GetService("ReplicatedStorage"):WaitForChild("HumanoidDied"):FireServer(game.Players.LocalPlayer.Character,false)
+end
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You got Bob spawn",Image = "rbxassetid://7733658504",Time = 5})
+GetBob:Set(false)
+end
+end
+task.wait()
+end
+while _G.AutoFarmBob and Autobob == "Super Fast Spawn" do
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 0)
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1.TouchInterest.Parent, 1)
+wait(0.5)
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,x)
+task.wait(0.2)
+if game.Workspace:FindFirstChild("bobcap") == nil then
+game:GetService("ReplicatedStorage"):WaitForChild("HumanoidDied"):FireServer(game.Players.LocalPlayer.Character,false)
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You got Bob spawn",Image = "rbxassetid://7733658504",Time = 5})
+GetBob:Set(false)
+end
+task.wait(1.8)
+end
+elseif _G.AutoFarmBob == true then
+OrionLib:MakeNotification({Name = "Error",Content = "You don't have Replica equipped, or You have Owned Items",Image = "rbxassetid://7733658504",Time = 5})
+wait(0.05)
+GetBob:Set(false)
+end
+	end    
+})
+Tab8:AddButton({
+	Name = "FrostBite Farm",
+	Callback = function()
+local teleportFunc = queueonteleport or queue_on_teleport
+    if teleportFunc then
+        teleportFunc([[
+            if not game:IsLoaded() then
+                game.Loaded:Wait()
+            end
+            repeat wait() until game.Players.LocalPlayer
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-554, 177, 56)
+wait(0.7)
+for i,v in ipairs(game:GetService("Workspace"):GetDescendants()) do
+            if v.ClassName == "ProximityPrompt" then
+                fireproximityprompt(v)
+            end
+        end
+]])
+end
+game:GetService("TeleportService"):Teleport(17290438723)
+  	end    
+})
+Tab8:AddButton({
+	Name = "Admin Glove Farm",
+	Callback = function()
+local teleportFunc = queueonteleport or queue_on_teleport
+    if teleportFunc then
+        teleportFunc([[
+            if not game:IsLoaded() then
+                game.Loaded:Wait()
+            end
+            repeat wait() until game.Players.LocalPlayer
+wait(13.5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(502, 76, 59)
+task.wait(6)
+if getconnections then
+for i,v in next, getconnections(game.Players.LocalPlayer.Idled) do
+v:Disable() 
+end
+end
+]])
+end
+if game:GetService("ReplicatedStorage").Assets.Retro then
+game.ReplicatedStorage.Assets.Retro.Parent = workspace
+wait(1.5)
+fireclickdetector(workspace.Retro.Map.RetroObbyMap:GetChildren()[5].StaffApp.Button.ClickDetector)
+else
+fireclickdetector(workspace.Retro.Map.RetroObbyMap:GetChildren()[5].StaffApp.Button.ClickDetector)
+end
+  	end    
+})
+Tab8:AddButton({
+	Name = "Farm Counter + Elude",
+	Callback = function()
+if _G.SelectMaze == "Teleport" then
+local teleportFunc = queueonteleport or queue_on_teleport
+if teleportFunc then
+    teleportFunc([[
+        if not game:IsLoaded() then
+            game.Loaded:Wait()
+        end
+        repeat wait() until game.Players.LocalPlayer
+        wait(3)
+Time = 121
+fireclickdetector(game.Workspace.CounterLever.ClickDetector)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0,100,0)
+wait(0.2)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+for i = 1,Time do
+Time = Time - 1
+game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Error",Text = "You wait time [ "..Time.." ] receive.",Icon = "rbxassetid://7733658504",Duration = 1})
+wait(1)
+end
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+wait(0.5)
+firetouchinterest(game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart"), game.Workspace.Ruins.Elude.Glove, 0)
+firetouchinterest(game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart"), game.Workspace.Ruins.Elude.Glove, 1)
+for i,v in pairs(workspace.Maze:GetDescendants()) do
+if v:IsA("ClickDetector") then
+fireclickdetector(v)
+end
+end
+    ]])
+end
+game:GetService("TeleportService"):Teleport(11828384869)
+elseif _G.SelectMaze == "Auto Keypad" then
+if not workspace:FindFirstChild("Keypad") then
+OrionLib:MakeNotification({Name = "Error",Content = "Server don't have keypad, auto start Serverhop",Image = "rbxassetid://7733658504",Time = 5})
+	for _, server in ipairs(game.HttpService:JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+    	if server.playing < server.maxPlayers and server.JobId ~= game.JobId then
+        	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, server.id)
+    	end
+	end
+else
+local teleportFunc = queueonteleport or queue_on_teleport
+if teleportFunc then
+    teleportFunc([[
+        if not game:IsLoaded() then
+            game.Loaded:Wait()
+        end
+        repeat wait() until game.Players.LocalPlayer
+        wait(3)
+Time = 121
+fireclickdetector(game.Workspace.CounterLever.ClickDetector)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0,100,0)
+wait(0.2)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+for i = 1,Time do
+Time = Time - 1
+game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Error",Text = "You wait time [ "..Time.." ] receive.",Icon = "rbxassetid://7733658504",Duration = 1})
+wait(1)
+end
+firetouchinterest(game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart"), game.Workspace.Ruins.Elude.Glove, 0)
+firetouchinterest(game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart"), game.Workspace.Ruins.Elude.Glove, 1)
+for i,v in pairs(workspace.Maze:GetDescendants()) do
+if v:IsA("ClickDetector") then
+fireclickdetector(v)
+end
+end
+    ]])
+end
+OrionLib:MakeNotification({Name = "Error",Content = "Server in have spawn keypad, auto start keypad",Image = "rbxassetid://7733658504",Time = 5})
+game.Workspace.CurrentCamera.CameraSubject = workspace.Keypad.Buttons.Enter
+fireclickdetector(workspace:WaitForChild("Keypad").Buttons:FindFirstChild("Reset").ClickDetector)
+local digits = tostring((#game.Players:GetPlayers()) * 25 + 1100 - 7)
+for i = 1, #digits do
+task.wait(0.8)
+local digit = digits:sub(i, i)
+fireclickdetector(workspace:WaitForChild("Keypad").Buttons:FindFirstChild(digit).ClickDetector)
+end
+task.wait(0.5)
+fireclickdetector(workspace:WaitForChild("Keypad").Buttons:FindFirstChild("Enter").ClickDetector)
+end
+end
+  	end    
+})
+Tab8:AddButton({
+	Name = "Ice Skate Farm",
+	Callback = function()
+if not game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer.UserId, 2906002612987222) then
+game:GetService("ReplicatedStorage").IceSkate:FireServer("Freeze")
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You have Owned badge",Image = "rbxassetid://7733658504",Time = 5})
+end
+  	end 
+})
 Tab8:AddToggle({
 	Name = "Slapple Farm | Only Woks On Arena",
 	Default = false,
@@ -1875,7 +2330,7 @@ end
 	end    
 })
 Tab8:AddToggle({
-	Name = "replica slap farm",
+	Name = "Replica Slap Farm",
 	Default = false,
 	Callback = function(state)
 ReplicaFarm = State
