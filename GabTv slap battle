@@ -199,7 +199,7 @@ end
 end
                 })
 Tab2:AddToggle({
-	Name = "Slap Aura 2",
+	Name = "Slap Aura 2 ",
 	Default = false,
 	Callback = function(state)
 SlapAura = state
@@ -210,6 +210,7 @@ if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("Humanoi
 Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
                         if 25 >= Magnitude then
 game.ReplicatedStorage.GhostHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+game.ReplicatedStorage.WarpHt:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
                     end
 end
 end
@@ -1732,6 +1733,22 @@ local Tab8 = Window:MakeTab({
 	PremiumOnly = false
 })
 Tab8:AddToggle({
+	Name = "SlapFarm Needed Dual Glove",
+	Default = false,
+	Callback = function(state)
+	SlapFarm = state
+while SlapFarm do
+local players = game.Players:GetChildren()
+            local RandomPlayer = players[math.random(1, #players)]
+            repeat RandomPlayer = players[math.random(1, #players)] until RandomPlayer ~= game.Players.LocalPlayer and RandomPlayer.Character:FindFirstChild("entered") and RandomPlayer.Character:FindFirstChild("Ragdolled").Value == false
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = RandomPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
+            wait(0.3)
+            game.ReplicatedStorage.GeneralHit:FireServer(RandomPlayer.Character:WaitForChild("HumanoidRootPart"))
+            wait(0.3)
+end
+	end    
+})
+Tab8:AddToggle({
 	Name = "Jet farm",
 	Default = false,
 	Callback = function(Value)
@@ -1882,7 +1899,7 @@ AutoTime = Value
 
 FarmTimeServer = Tab8:AddLabel("Farm Time [ 0 ]")
 
-GetFarmTime = Tab3:AddToggle({
+GetFarmTime = Tab8:AddToggle({
 	Name = "Time Farm Toggle",
 	Default = false,
 	Callback = function(Value)
