@@ -1,0 +1,100 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Player = game.Players.LocalPlayer
+local Window = OrionLib:MakeWindow({Name = "put Ur name here or something | Key System", HidePremium = true, SaveConfig = true, IntroText = "Key System"})
+
+OrionLib:MakeNotification({
+	Name = "Logged In ",
+	Content = "You have Logged In As " ..Player.Name.." ! ",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+local Tab = Window:MakeTab({
+	Name = "Key System",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+_G.Key = "key here"
+_G.KeyInput = "string"
+
+function MainScript()
+    print("loading script please wait")
+end
+
+function CorrectKeyNotif()
+OrionLib:MakeNotification({
+	Name = "CorrectKey",
+	Content = "You enter the key ",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+end
+
+function IncorrectKeyNotif()
+OrionLib:MakeNotification({
+	Name = "IncorrectKey",
+	Content = "Invalid key Try Again",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+end
+
+function Premiumkey()
+OrionLib:MakeNotification({
+	Name = "Premium Only Acticated",
+	Content = "Powered by bypass",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+end
+
+Tab:AddTextbox({
+	Name = "Enter key Here",
+	Default = "",
+	TextDisappear = false,
+	Callback = function(Value)
+	_G.KeyInput = Value
+	end	  
+})
+Tab:AddButton({
+	Name = "Check Key",
+	Callback = function()
+if _G.KeyInput == _G.Key then
+      MainScript()
+      CorrectKeyNotif()
+      OrionLib:Destroy()
+      else
+      IncorrectKeyNotif()
+      end
+  	end    
+})
+Tab:AddButton({
+	Name = "Get Key",
+	Callback = function()
+      		setclipboard("How")
+  	end    
+})
+
+local Tab2 = Window:MakeTab({
+	Name = "Premium instant acces",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = true
+})
+
+Tab2:AddButton({
+	Name = "Open bypass Script",
+	Callback = function()
+MainScript()
+Premiumkey()
+  	end    
+})
+
+task.wait(3)
+
+OrionLib:MakeNotification({
+	Name = "Succes Fully loaded",
+	Content = "",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
