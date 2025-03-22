@@ -1,5 +1,5 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/junexd12/junexd12/refs/heads/main/Orion%20booting%20library')))()
-
+local Player = game.Players.LocalPlayer
 if game.PlaceId == 6403373529 or game.PlaceId == 11520107397 or game.PlaceId == 124596094333302 or game.PlaceId == 9015014224 then
 local Window = OrionLib:MakeWindow({Name = "👑Gabtv | premium | Slapbattle👑", HidePremium = false, SaveConfig = true, ConfigFolder = "SB V1", IntroText = "Slapbattle👏"})
 
@@ -10,6 +10,7 @@ local Tab = Window:MakeTab({
 })
 Tab:AddLabel("Credit to [ GabTv ]")
 Tab:AddLabel("Subcribe to Megaphonk266")
+Tab:AddLabel("Wellcome back " ..Player.Name.." ! ")
 Tab:AddButton({
 	Name = "Infinite Yield",
 	Callback = function()
@@ -2326,7 +2327,9 @@ local Tab = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+Tab:AddLabel("Credit to [ GabTv ]")
 Tab:AddLabel("Subcribe to Megaphonk266")
+Tab:AddLabel("Wellcome back " ..Player.Name.." ! ")
 Tab:AddButton({
 	Name = "Infinite Yield",
 	Callback = function()
@@ -2567,7 +2570,9 @@ local Tab1 = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+Tab1:AddLabel("Credit to [ GabTv ]")
 Tab1:AddLabel("Subcribe to Megaphonk266")
+Tab1:AddLabel("Wellcome back " ..Player.Name.." ! ")
 Tab1:AddButton({
 	Name = "Infinite Yield",
 	Callback = function()
