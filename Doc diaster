@@ -1,0 +1,426 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "RemiAPE | NDS", HidePremium = false, SaveConfig = false, ConfigFolder = "OrionTest", IntroText = "RemiAPE X Orion"})
+
+    OrionLib:MakeNotification({
+        Name = "RemiAPE",
+        Content = "Made by: aoki0x",
+        Image = "rbxassetid://12117215397",
+        Time = 10
+    })
+
+    --Values
+    _G.autowinfarm = true
+    _G.NoFallDamage = true
+
+    --Functions
+    local function autowinfarm()
+            if _G.autowinfarm == true and  game.Players.LocalPlayer.Character and  game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-236, 180, 360, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+            end
+        end
+
+    local function NoFallDamage()
+        local FallDamageScript = (game.Players.LocalPlayer.Character ~= nil) and game.Players.LocalPlayer.Character:FindFirstChild("FallDamageScript") or nil
+        if FallDamageScript then
+        FallDamageScript:Destroy()
+        end
+    end
+
+
+
+    local Tab = Window:MakeTab({
+        Name = "Main",
+        Icon = "rbxassetid://12053823591"
+    })
+
+    local Section = Tab:AddSection({
+        Name = "Auto Farm"
+    })
+
+    Section:AddToggle({
+        Name = "Auto Win",
+        Default = false,
+        Callback = function(Value)
+            _G.autowinfarm = Value
+            autowinfarm()
+        end
+    })
+
+    local Section2 = Tab:AddSection({
+        Name = "Other"
+    })
+
+    Section2:AddToggle({
+        Name = "Remove Fall Damage (Auto)",
+        Default = false,
+        Callback = function(Value)
+            _G.NoFallDamage = Value
+            NoFallDamage()
+        end
+    })
+
+    Section2:AddToggle({
+        Name = "Walk On Water",
+        Default = false,
+        Callback = function(bool)
+            if bool == false then do game.Workspace.WaterLevel.CanCollide = false
+                game.Workspace.WaterLevel.Size = Vector3.new(10, 1, 10)
+            end
+        end
+            if bool == true then do game.Workspace.WaterLevel.CanCollide = true
+                game.Workspace.WaterLevel.Size = Vector3.new(5000, 1, 5000)
+            end
+        end
+    end
+    })
+
+    Section2:AddButton({
+        Name = "Infinite Jump Gui",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/aoki0x/aoki0x/main/Infinite%20Jump%20Gui.lua"))()
+        end
+    })
+
+    Section2:AddButton({
+        Name = "Launch Rocket (Launch Land Map)",
+        Callback = function()
+            pcall(function()
+                fireclickdetector(game:GetService("Workspace").Structure["Launch Land"]["SPACESHIP!!"].Shuttle.IgnitionButton.ClickDetector)
+                fireclickdetector(game:GetService("Workspace").Structure["Launch Land"].RocketStand.ConsoleLower.ReleaseButtonLower.ClickDetector)
+                fireclickdetector(game:GetService("Workspace").Structure["Launch Land"].RocketStand.ConsoleUpper.ReleaseButtonUpper.ClickDetector)
+                fireclickdetector(game:GetService("Workspace").Structure["Launch Land"].LoadingTower.Console.ReleaseEntryBridge.ClickDetector)
+            end)
+        end
+    })
+
+    Section2:AddButton({
+        Name = "Show Current Disaster (View Warning Console)",
+        Callback = function()
+            warn(game.Players.LocalPlayer.Character.SurvivalTag.Value)
+        end
+    })
+
+    Section2:AddButton({
+        Name = "Set Health To Max",
+        Callback = function()
+            game.Players.LocalPlayer.Character.Humanoid.Health = 100
+        end
+    })
+
+    Section2:AddButton({
+        Name = "Remove Blizzard Ui",
+        Callback = function()
+            game.Players.LocalPlayer.PlayerGui.BlizzardGui:destroy()
+        end
+    })
+
+    Section2:AddButton({
+        Name = "Remove Sandstorm Ui",
+        Callback = function()
+            game.Players.LocalPlayer.PlayerGui.SandStormGui:destroy()
+        end
+    })
+
+    local Section3 = Tab:AddSection({
+        Name = "Gamepass"
+    })
+
+    Section3:AddToggle({
+        Name = "Vote Map (Compass)",
+        Default = false,
+        Callback = function(bool)
+            if bool == false then do game.Players.LocalPlayer.PlayerGui.MainGui.MapVotePage.Visible = false
+            end
+        end
+            if bool == true then do game.Players.LocalPlayer.PlayerGui.MainGui.MapVotePage.Visible = true
+            end
+        end
+    end, false
+    })
+    
+    local Section4 = Tab:AddSection({
+        Name = "Teleport"
+    })
+
+    Section4:AddButton({
+        Name = "Island",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-83.5, 48.5, -27.5, -1, 0, 0, 0, 1, 0, 0, 0, -1) --Game Island
+        end
+    })
+
+    Section4:AddButton({
+        Name = "Tower",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-280, 180, 341, 1, 0, 0, 0, 1, 0, 0, 0, 1) --Spawn Tower
+        end
+    })
+
+    local Tab2 = Window:MakeTab({
+        Name = "Miscellaneous",
+        Icon = "rbxassetid://12623079242"
+    })
+
+    local Section5 = Tab2:AddSection({
+        Name = "Extras"
+    })
+
+    Section5:AddButton({
+        Name = "Fly Gui V3",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/aoki0x/aoki0x/main/Fly%20Gui.lua"))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Mobile Keyboard",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Mobile Shiftlock",
+        Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/aoki0x/aoki0x/main/Shiftlock%20Mobile.lua'))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Mobile Cursor",
+        Callback = function()
+            loadstring(game:HttpGet('https://pastefy.app/58d8d52G/raw'))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Fling Gui",
+        Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe./main/Fling%20GUI'))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Sit Gui",
+        Callback = function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/Qs3FzDFB"))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Headless + One Leg (One Leg R6)",
+        Callback = function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/e0pecmKW"))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "One Leg (R15)",
+        Callback = function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/rw9sqWjJ"))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Korblox X Headless (Korblox Only R15)",
+        Callback = function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/nu8nksBs"))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Auto Play Piano",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ZhenX201/Auto-Piano-Faded/main/source"))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Hacker Chat Gui (No Tags)",
+        Callback = function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/BgyNtbNH'))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Outfit Copier (Need User Id)",
+        Callback = function()
+            loadstring(game:HttpGet(("https://raw.githubusercontent.com/Invooker11/Outfit/main/OutfitCopier.lua"),true))()
+        end
+    })
+
+    Section5:AddButton({
+        Name = "Godmode (Universal)",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/main/main",true))()
+        end
+    })
+
+    local Tab3 = Window:MakeTab({
+        Name = "FE Scripts",
+        Icon = "rbxassetid://6090344671"
+    })
+
+    local SectionFE = Tab3:AddSection({
+        Name = "FE Scripts"
+    })
+
+    SectionFE:AddToggle({
+        Name = "FE Sound Spammer",
+        Default = false,
+        Callback = function(bool)
+            _G.EARFUK = bool;
+                while _G.EARFUK == true and task.wait(EARFUK1) do
+                for _, sound in next, workspace:GetDescendants() do
+                    if sound:isA("Sound") then
+                        sound:Play()
+                            end
+                    end end
+            end, false})
+
+    SectionFE:AddButton({
+        Name = "FE Universal Admin",
+        Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub/main/FE%20Trolling%20GUI.luau'))()
+        end
+    })
+
+    SectionFE:AddButton({
+        Name = "FE Character Animations",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Animation-Hub/main/Animation%20Gui"))()
+        end
+    })
+
+    SectionFE:AddButton({
+        Name = "FE Admin Commands",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/JoeScriptHub/GrimEx-Admin/main/GrimEx%20Admin"))()
+        end
+    })
+
+    SectionFE:AddButton({
+        Name = "FE Invisible Script",
+        Callback = function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/C168YFQB'))()
+        end
+    })
+
+    SectionFE:AddButton({
+        Name = "FE Patchma Hub Script",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/aoki0x/aoki0x/main/PATCHMA%20HUB.lua"))()
+        end
+    })
+
+    SectionFE:AddButton({
+        Name = "FE Teleknesis V2",
+        Callback = function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/iKxvzvbG"))
+        end
+    })
+
+    local Tab4 = Window:MakeTab({
+        Name = "Settings",
+        Icon = "rbxassetid://11818627057"
+    })
+
+    local Section7 = Tab4:AddSection({
+        Name = "Universal"
+    })
+
+    Section7:AddButton({
+        Name = "Lightux Esp",
+        Callback = function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/3cKjwUCG'))()
+        end
+    })
+
+    Section7:AddButton({
+        Name = "Anti AFK",
+        Callback = function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/2n6FV7Sc'))()
+        end
+    })
+
+    Section7:AddButton({
+        Name = "Infinite Yield",
+        Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+        end
+    })
+
+    Section7:AddButton({
+        Name = "Dark Dex V3",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
+        end
+    })
+
+    local Section8 = Tab4:AddSection({
+        Name = "Humanoid"
+    })
+
+    Section8:AddSlider({
+        Name = "Walkspeed",
+        Min = 0,
+        Max = 400,
+        Default = 16,
+        Color = Color3.fromRGB(133, 139, 148),
+        Increment = 1,
+        ValueName = "Player Walk Speed",
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+        end
+    })
+
+    Section8:AddSlider({
+        Name = "Jump Height",
+        Min = 0,
+        Max = 400,
+        Default = 50,
+        Color = Color3.fromRGB(133, 139, 148),
+        Increment = 1,
+        ValueName = "Player Jump Height",
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+        end
+    })
+
+    Section8:AddSlider({
+        Name = "Gravity",
+        Min = 0,
+        Max = 400,
+        Default = 196,
+        Color = Color3.fromRGB(133, 139, 148),
+        Increment = 1,
+        ValueName = "Player Gravity",
+        Callback = function(Value)
+            game.Workspace.Gravity = Value
+        end
+    })
+
+    Section8:AddSlider({
+        Name = "FOV",
+        Min = 0,
+        Max = 120,
+        Default = 70,
+        Color = Color3.fromRGB(133, 139, 148),
+        Increment = 1,
+        ValueName = "Player Fov",
+        Callback = function(Value)
+            game.Workspace.Camera.FieldOfView = Value
+        end
+    })
+
+    local Section10 = Tab4:AddSection({
+        Name = "Exit Gui"
+    })
+
+    Section10:AddButton({
+        Name = "Exit",
+        Callback = function()
+            OrionLib:Destroy()
+        end
+    })
+    OrionLib:Init()
