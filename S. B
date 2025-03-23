@@ -3,6 +3,18 @@ local Player = game.Players.LocalPlayer
 if game.PlaceId == 6403373529 or game.PlaceId == 11520107397 or game.PlaceId == 124596094333302 or game.PlaceId == 9015014224 then
 local Window = OrionLib:MakeWindow({Name = "👑Gabtv | premium | Slapbattle👑", HidePremium = false, SaveConfig = true, ConfigFolder = "SB V1", IntroText = "Slapbattle👏"})
 
+local bypass;
+    bypass = hookmetamethod(game, "__namecall", function(method, ...) 
+        if getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Ban then
+            return
+        elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.AdminGUI then
+            return
+        elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.WalkSpeedChanged then
+            return
+        end
+        return bypass(method, ...)
+    end)
+
 local Tab = Window:MakeTab({
 	Name = "Home",
 	Icon = "rbxassetid://8834748103",
@@ -27,6 +39,12 @@ Tab:AddButton({
 	Name = "bypass anti cheat",
 	Callback = function()
       		loadstring(game:HttpGet("https://rawscripts.net/raw/UPDATE-Slap-Battles-Anticheat-bypass-30812"))()
+  	end    
+})
+Tab:AddButton({
+	Name = "Slap Farm Dual Glove By GabTv",
+	Callback = function()
+      		loadstring(game:HttpGet("https://pastebin.com/raw/Eerz5ERL"))();
   	end    
 })
 Tab:AddButton({
@@ -1279,7 +1297,7 @@ Tab10:AddButton({
             Terrain.WaterTransparency = 0
             Lighting.GlobalShadows = false
             Lighting.FogEnd = 9e9
-            settings().Rendering.QualityLevel = 1
+            settings().Rendering.QualityLelvel = 1
             for i,v in pairs(game:GetDescendants()) do
                 if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
                     v.Material = "Plastic"
@@ -2797,6 +2815,303 @@ end
 
 
 elseif game.PlaceId == 9431156611 then
+local Window = OrionLib:MakeWindow({Name = "👑Gabtv | premium | Slapbattle👑", HidePremium = false, SaveConfig = true, ConfigFolder = "SB V4", IntroText = "Slapbattle👏"})
+
+local bypass;
+     bypass = hookmetamethod(game, "__namecall", function(method, ...) 
+         if getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Events.Ban then
+             return
+         elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Events.AdminGUI then
+             return
+         elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Events.WS then
+             return
+          elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Events.WS2 then
+            return
+       end
+          return bypass(method, ...)
+     end)
+
+local Tab = Window:MakeTab({
+	Name = "Home",
+	Icon = "rbxassetid://8834748103",
+	PremiumOnly = false
+})
+Tab:AddLabel("Credit to [ GabTv ]")
+Tab:AddLabel("Subcribe to Megaphonk266")
+Tab:AddLabel("Wellcome back " ..Player.Name.." ! ")
+Tab:AddButton({
+	Name = "Infinite Yield",
+	Callback = function()
+      		loadstring(game:HttpGet('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Infinite%20Yield%20but%20with%20secure%20dex'))()
+  	end    
+})
+Tab:AddButton({
+	Name = "Fly Gui",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/junexd12/junexd12/refs/heads/main/Premium%20Fly%20gui"))()
+  	end    
+})
+Tab:AddButton({
+	Name = "bypass anti cheat",
+	Callback = function()
+      		loadstring(game:HttpGet("https://rawscripts.net/raw/UPDATE-Slap-Battles-Anticheat-bypass-30812"))()
+  	end    
+})
+Tab:AddButton({
+	Name = "NoCoolDown",
+	Callback = function()
+      		loadstring(game:HttpGet(("https://pastebin.com/raw/8EpFwdM9")))()
+  	end    
+})
+Tab:AddButton({
+	Name = "Rejoin",
+	Callback = function()
+      		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+  	end    
+})
+Tab:AddButton({
+	Name = "Destroy GUI",
+	Callback = function()
+      		OrionLib:Destroy()
+  	end    
+})
+
+local Tab2 = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://8834748103",
+	PremiumOnly = false
+})
+Tab2:AddToggle({
+	Name = "Slap Aura",
+	Default = false,
+	Callback = function(Value)
+		SlapAura = Value
+                while SlapAura do
+pcall(function()
+for i,v in pairs(game.Players:GetChildren()) do
+                    if v ~= game.Players.LocalPlayer and v.Character then
+if v.Character:FindFirstChild("Dead") == nil and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:WaitForChild("inMatch").Value == true and game.Players.LocalPlayer.Character:WaitForChild("inMatch").Value == true then
+Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+                        if ReachAura >= Magnitude then
+game.ReplicatedStorage.Events.Slap:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
+                    end
+end
+end
+                end
+end)
+task.wait(0.95)
+end
+	end    
+})
+Tab2:AddSlider({
+	Name = "Slap Aura Magnetude Distance",
+	Min = 10,
+	Max = 50,
+	Default = 25,
+	Color = Color3.fromRGB(140, 185, 255),
+	Increment = 1,
+	ValueName = "Magnetude",
+	Callback = function(Value)
+		ReachAura = Value
+	end    
+})
+Tab2:AddToggle({
+	Name = "Glove Esp",
+	Default = false,
+	Callback = function(Value)
+		GloveESP = Value
+if GloveESP == false then
+for i, v in ipairs(game.Players:GetChildren()) do
+                if v.Character and v.Character:FindFirstChild("Head") and v.Character.Head:FindFirstChild("GloveEsp") then
+ v.Character.Head.GloveEsp:Destroy()
+                end
+            end
+end
+while GloveESP do
+for i, v in ipairs(game.Players:GetChildren()) do
+if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Head") and v.Character.inMatch.Value == true and v.Character.Head:FindFirstChild("GloveEsp") == nil then
+GloveEsp = Instance.new("BillboardGui", v.Character.Head)
+GloveEsp.Adornee = v.Character.Head
+GloveEsp.Name = "GloveEsp"
+GloveEsp.Size = UDim2.new(0, 100, 0, 150)
+GloveEsp.StudsOffset = Vector3.new(0, 1, 0)
+GloveEsp.AlwaysOnTop = true
+GloveEsp.StudsOffset = Vector3.new(0, 3, 0)
+GloveEspText = Instance.new("TextLabel", GloveEsp)
+GloveEspText.BackgroundTransparency = 1
+GloveEspText.Size = UDim2.new(0, 100, 0, 100)
+GloveEspText.TextSize = 25
+GloveEspText.Font = Enum.Font.FredokaOne
+GloveEspText.TextColor3 = Color3.new(255, 255, 255)
+GloveEspText.TextStrokeTransparency = 0
+GloveEspText.Text = "Glove [ "..v.Glove.Value.." ]"
+                end
+            end
+task.wait()
+end
+	end    
+})
+
+local Tab3 = Window:MakeTab({
+	Name = "Antis",
+	Icon = "rbxassetid://8834748103",
+	PremiumOnly = false
+})
+Tab3:AddDropdown({
+	Name = "Remove",
+	Default = "",
+	Options = {"Lava", "Zone Blur", "Acid"},
+	Callback = function(Value)
+if Value == "Lava" then
+for _, v in ipairs(game:GetService("Workspace"):GetDescendants()) do
+    if v.Name == "Lava" then
+        v:Destroy()
+    end
+end
+elseif Value == "Zone Blur" then
+for _, v in ipairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+    if v.Name == "ZoneEffects" then
+        v:Destroy()
+    end
+end
+elseif Value == "Acid" then
+for _, v in ipairs(game:GetService("Workspace"):GetDescendants()) do
+    if v.Name == "Acid" then
+        v:Destroy()
+    end
+end
+end
+	end    
+})
+
+Tab3:AddDropdown({
+	Name = "Safe",
+	Default = "",
+	Options = {"Lava", "Zone Blur Remove", "Acid"},
+	Callback = function(Value)
+if Value == "Lava" then
+workspace.Map.DragonDepths.Lava.CanTouch = false
+elseif Value == "Zone Blur Remove" then
+for _, v in ipairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+    if v.Name == "ZoneEffects" then
+        v:Destroy()
+    end
+end
+elseif Value == "Acid" then
+for _,v in ipairs(workspace.Map.AcidAbnormality:GetChildren()) do
+			if v.Name == "Acid" and v:IsA("BasePart") and v:FindFirstChildWhichIsA("TouchTransmitter") then
+				v.CanTouch = false
+			end
+		end
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Zone Color",
+	Default = false,
+	Callback = function(Value)
+		RemoveZone = Value
+game.Players.LocalPlayer.Character:WaitForChild("inZone").Changed:Connect(function()
+if RemoveZone then
+game.Players.LocalPlayer.Character:WaitForChild("inZone").Value = false
+end
+end)
+	end    
+})
+
+Tab3:AddToggle({
+	Name = "Anti Icecube",
+	Default = false,
+	Callback = function(Value)
+_G.AntiIce = Value
+while _G.AntiIce do
+    for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            if v.Name == "Icecube" then
+                v:Destroy()
+                game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+                game.Players.LocalPlayer.Character.Humanoid.AutoRotate = true
+            end
+       end
+task.wait()
+end
+	end    
+})
+
+Tab3:AddToggle({
+	Name = "Anti Lava And Acid",
+	Default = false,
+	Callback = function(Value)
+game.Workspace["AntiLava"].CanCollide = Value
+game.Workspace["AntiLava"]["AntiAcid"].CanCollide = Value
+	end    
+})
+
+Tab3:AddToggle({
+	Name = "Anti Chat",
+	Default = false,
+	Callback = function(Value)
+AntiRecord = Value
+	end    
+})
+for i,p in pairs(game.Players:GetChildren()) do
+if p ~= game.Players.LocalPlayer then
+p.Chatted:Connect(function(message)
+Words = message:split(" ")
+if AntiRecord == true then
+for i, v in pairs(Words) do
+if v:lower():match("recording") or v:lower():match(" rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match(" disco") or v:lower():match(" disc") or v:lower():match("ticket") or v:lower():match("tickets") or v:lower():match(" ds") or v:lower():match(" dc") or v:lower():match("dizzy") or v:lower():match("dizzycord") or v:lower():match(" clip") or v:lower():match("proof") or v:lower():match("evidence") then
+game.Players.LocalPlayer:Kick("Possible player recording detected.".." [ "..p.Name.." ]".." [ "..message.." ]")
+end
+end
+end
+end)
+end
+end
+game.Players.PlayerAdded:Connect(function(Player)
+Player.Chatted:Connect(function(message)
+Words = message:split(" ")
+if AntiRecord == true then
+for i, v in pairs(Words) do
+if v:lower():match("recording") or v:lower():match(" rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match(" disco") or v:lower():match(" disc") or v:lower():match("ticket") or v:lower():match("tickets") or v:lower():match(" ds") or v:lower():match(" dc") or v:lower():match("dizzy") or v:lower():match("dizzycord") or v:lower():match(" clip") or v:lower():match("proof") or v:lower():match("evidence") then
+game.Players.LocalPlayer:Kick("Possible player recording detected.".." [ "..Player.Name.." ]".." [ "..message.." ]")
+end
+end
+end
+end)
+end)
+
+Tab3:AddToggle({
+	Name = "Anti Ragdoll",
+	Default = false,
+	Callback = function(Value)
+        _G.AntiRagdoll = Value
+while _G.AntiRagdoll  do
+if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+if game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Value == true then
+repeat task.wait() game.Players.LocalPlayer.Character.Torso.Anchored = true
+until game.Players.LocalPlayer.Character:WaitForChild("Ragdolled").Value == false
+game.Players.LocalPlayer.Character.Torso.Anchored = false
+end
+end
+task.wait()
+end
+	end    
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
