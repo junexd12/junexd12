@@ -96,7 +96,7 @@ for i,v in pairs(game.Players:GetChildren()) do
                     if v ~= game.Players.LocalPlayer and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and v.Character then
 if v.Character:FindFirstChild("entered") and v.Character:FindFirstChild("HumanoidRootPart") then
 Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
-                        if 25 >= Magnitude then
+                        if ReachAura >= Magnitude then
 game.ReplicatedStorage.Speedrunhit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.MailHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
 game.ReplicatedStorage.DiamondHit:FireServer(v.Character:WaitForChild("HumanoidRootPart"))
@@ -179,6 +179,18 @@ task.wait(0.95)
 end
 end
                 })
+Tab2:AddSlider({
+	Name = "Slap Aura Magnetude Distance",
+	Min = 10,
+	Max = 35,
+	Default = 25,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Magnetude",
+	Callback = function(Value)
+		ReachAura = Value
+	end    
+})
 Tab2:AddToggle({
 	Name = "Glove ESP",
 	Default = false,
@@ -243,7 +255,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Orig
   	end    
 })
 Tab2:AddToggle({
-	Name = "Spam Frost,Boxer,Lamp,Others | General abbility Glove Only",
+	Name = "Spam Frost | Frostbite Glove Only",
 	Default = false,
 	Callback = function(Value)
 	FB = Value
@@ -258,46 +270,43 @@ end
 	end
 })
 Tab2:AddToggle({
-	Name = "Rhythm Spam | Rhythm Glove Only",
+	Name = "Spam Bind Ultimate | Bind Glove only",
 	Default = false,
-	Callback = function(Value)
-RhythmSpam = (Value)
-while RhythmSpam do
-game:GetService("ReplicatedStorage").rhythmevent:FireServer("AoeExplosion",0)
-task.wait(.00000000001)
-end
-	end
-})
-Tab2:AddToggle({
-	Name = "Null Spam | Null Glove Only",
-	Default = false,
-	Callback = function(Value)
-	NullSpam = Value
-while NullSpam do
-game:GetService("ReplicatedStorage").NullAbility:FireServer()
-task.wait(.001)
-end
-     end
-})
-Tab2:AddToggle({
-	Name = "Rojo Spam | Rojo Glove Only",
-	Default = false,
-	Callback = function(Value)
-RojoSpam = (Value)
-while RojoSpam do
-game:GetService("ReplicatedStorage"):WaitForChild("RojoAbility"):FireServer("Release", {game.Players[Person].Character.HumanoidRootPart.CFrame})
-task.wait(.001)
+	Callback = function(state)
+	bind = state
+while bind do
+	local args = {
+    [1] = "ultimate",
+    [2] = {
+        ["goal"] = CFrame.new(-5.221479892730713, -82.63951110839844, 9.19688606262207, -0.9108240008354187, -0.39118051528930664, 0.13182348012924194, -0.01001846231520176, 0.34019777178764343, 0.9403005242347717, -0.41267329454421997, 0.8551276326179504, -0.3137793242931366),
+        ["origin"] = CFrame.new(5.324398517608643, -7.415467262268066, -15.905460357666016, -0.9108240008354187, -0.39118051528930664, 0.13182348012924194, -0.01001846231520176, 0.34019777178764343, 0.9403005242347717, -0.41267329454421997, 0.8551276326179504, -0.3137793242931366)
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("GeneralAbility"):FireServer(unpack(args))
+task.wait(0.3)
 end
 	end
 })
 Tab2:AddToggle({
 	Name = "Spam Piano Drop | All Glove",
 	Default = false,
-	Callback = function(Value)
-	DP = Value
-while DP do
+	Callback = function(state)
+	pianodrop = state
+while pianodrop do
 game:GetService("ReplicatedStorage").Piano:FireServer()
-wait(0.3)
+task.wait(0.3)
+end
+	end
+})
+Tab2:AddToggle({
+	Name = "Spam Honey | All Glove",
+	Default = false,
+	Callback = function(state)
+	muck = state
+while muck do
+game:GetService("ReplicatedStorage").Events.Muck:FireServer()
+task.wait(0.3)
 end
 	end
 })
@@ -375,7 +384,7 @@ game:GetService("ReplicatedStorage").slapstick:FireServer("runeffect")
 wait(5)
 game:GetService("ReplicatedStorage").slapstick:FireServer("fullcharged")
 wait(1)
-OrionLib:MakeNotification({Name = "Error",Content = "Started RUN Now.",Image = "rbxassetid://7733658504",Time = 5})
+OrionLib:MakeNotification({Name = "Error",Content = "Started RUN Now!",Image = "rbxassetid://7733658504",Time = 5})
 game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 70
 wait(25)
@@ -388,7 +397,7 @@ end
 	end
 })
 Tab2:AddDropdown({
-	Name = "SkapStick Ability",
+	Name = "SlapStick Ability",
 	Default = "None",
 	Options = {"dash", "runeffect", "fullcharged", "charge", "cancelrun", "addarm", "discharge"},
 	Callback = function(Value)
@@ -706,7 +715,7 @@ if targetPlayer then
 _G.VoidPlayer = targetPlayer.Name
 OrionLib:MakeNotification({Name = "Error",Content = "Found Player [ ".._G.VoidPlayer.." ]",Image = "rbxassetid://7733658504",Time = 5})
 else
-OrionLib:MakeNotification({Name = "Error",Content = "Can't find player",Image = "rbxassetid://7733658504",Time = 5})
+OrionLib:MakeNotification({Name = "Error",Content = "Player might left the game",Image = "rbxassetid://7733658504",Time = 5})
 end
 	end	  
 })
@@ -732,7 +741,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 task.wait(0.05)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
 else
-OrionLib:MakeNotification({Name = "Error",Content = "You don't have Swapper equipped, or you aren't in the arena.",Image = "rbxassetid://7733658504",Time = 5})
+OrionLib:MakeNotification({Name = "Error",Content = "You need Swapper And Enter Arena",Image = "rbxassetid://7733658504",Time = 5})
 end
 elseif _G.PlayerChoose == "Random" then
 if game.Players.LocalPlayer.Character:FindFirstChild("Swapper") or game.Players.LocalPlayer.Backpack:FindFirstChild("Swapper") then
@@ -759,19 +768,6 @@ OrionLib:MakeNotification({Name = "Error",Content = "You don't have Swapper equi
 end
 end
   	end    
-})
-
-Tab2:AddTextbox({
-	Name = "Give person Rojo Spam",
-	Default = "Username",
-	TextDisappear = false,
-	Callback = function(Value)
-if Value == "Me" or Value == "me" or Value == "Username" or Value == "" then
-Person = game.Players.LocalPlayer.Name
-else
-Person = Value
-end
-	end	  
 })
 Tab2:AddToggle({
 	Name = "Auto Spawn | Arena",
@@ -1394,9 +1390,9 @@ end
 })
 Tab10:AddSlider({
 	Name = "Extend HitBox",
-	Min = 2,
-	Max = 30,
-	Default = 20,
+	Min = 2.0,
+	Max = 100.0,
+	Default = 20.0,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
 	ValueName = "Hitbox",
@@ -1606,6 +1602,12 @@ until game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer
     end    
 })
 Tab5:AddButton({
+	Name = "Get hybrid",
+	Callback = function()
+game:GetService("ReplicatedStorage").GRRRRR:FireServer(true)
+    end    
+})
+Tab5:AddButton({
 	Name = "Get Bob",
 	Callback = function()
 loadstring(game:HttpGet("https://pastebin.com/raw/kYx1gwpv"))()
@@ -1692,12 +1694,6 @@ until game.Players.LocalPlayer.Character:FindFirstChild("EMPStunBadgeCounter") a
 else
 OrionLib:MakeNotification({Name = "Error",Content = "You don't have Stun equipped.",Image = "rbxassetid://8834748103",Time = 5})
 end
-       end    
-})
-Tab5:AddButton({
-	Name = "Get Chain | Glove",
-	Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/AutoGetPoltergeist/main/main.lua'))()
        end    
 })
 Tab5:AddButton({
@@ -1793,7 +1789,7 @@ Tab7:AddTextbox({
 	end	  
 })
 Tab7:AddTextbox({
-	Name = "E_Glove v2",
+	Name = "Get Glove Instantly | Warming This Might Work Or Not",
 	Default = "Glove name",
 	TextDisappear = true,
 	Callback = function(txt)
@@ -1902,7 +1898,7 @@ end
 	end    
 })
 Tab7:AddButton({
-	Name = "destroy al tycoon",
+	Name = "destroy all tycoon",
 	Callback = function()
 for i = 1, 110 do
  for i,v in pairs(workspace:GetDescendants()) do
@@ -1938,65 +1934,9 @@ local players = game.Players:GetChildren()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = RandomPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
             wait(0.3)
             game.ReplicatedStorage.KSHit:FireServer(RandomPlayer.Character:WaitForChild("HumanoidRootPart"))
-            wait(0.3)
+            wait()
 end
 	end    
-})
-Tab8:AddButton({
-	Name = "Use Replica",
-	Callback = function()
-fireclickdetector(game.Workspace.Lobby.Replica.ClickDetector)
-  	end    
-})
-Tab8:AddToggle({
-	Name = "Replica Slap Farm",
-	Default = false,
-	Callback = function(state)
-ReplicaFarm = State
-if game.Players.LocalPlayer.leaderstats.Glove.Value == "Replica" and game.Players.LocalPlayer.Character.IsInDefaultArena.Value == true then
-if ReplicaFarm == true then
-coroutine.wrap(SpamReplica)()
-end
-while ReplicaFarm do
-for i, v in pairs(workspace:GetChildren()) do
-                if v.Name:match(game.Players.LocalPlayer.Name) and v:FindFirstChild("HumanoidRootPart") then
-game.ReplicatedStorage.b:FireServer(v:WaitForChild("HumanoidRootPart"))
-                end
-            end
-task.wait()
-                       end
-elseif ReplicaFarm == true then
-OrionLib:MakeNotification({Name = "Error",Content = "You don't have Replica equipped, or you aren't in the Default arena.",Image = "rbxassetid://7733658504",Time = 5})
-wait(0.05)
-RSF:Set(false)
-end
-	end    
-})
-Tab8:AddButton({
-	Name = "Use Boxer",
-	Callback = function()
-fireclickdetector(game.Workspace.Lobby.Boxer.ClickDetector)
-  	end    
-})
-Tab8:AddButton({
-	Name = "Boxer slap farm",
-	Callback = function()
-loadstring(game:HttpGet("https://pastebin.com/raw/zunzW34R"))()
-      		print("Boxer slap farm Activated")
-  	end    
-})
-Tab8:AddButton({
-	Name = "Use Mace",
-	Callback = function()
-fireclickdetector(game.Workspace.Lobby.Mace.ClickDetector)
-  	end    
-})
-Tab8:AddButton({
-	Name = "Mace slap farm",
-	Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/IncognitoScripts/SlapBattles/refs/heads/main/SlapFarmMace'))()
-      		print("Boxer slap farm Activated")
-  	end    
 })
 Tab8:AddButton({
 	Name = "Use Error",
@@ -2054,7 +1994,7 @@ game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel
 wait(1.5)
 end
 elseif Brickfarm == true then
-OrionLib:MakeNotification({Name = "Error",Content = "You don't have Brick equipped",Image = "rbxassetid://7733658504",Time = 5})
+OrionLib:MakeNotification({Name = "Error",Content = "You need Brick and Enter Arena",Image = "rbxassetid://7733658504",Time = 5})
 wait(0.05)
 AutoFarmBrick:Set(false)
 end
@@ -3046,7 +2986,7 @@ game.Workspace["AntiLava"]["AntiAcid"].CanCollide = Value
 	end    
 })
 
-Tab3:AddToggle({
+AntiRecord = Tab3:AddToggle({
 	Name = "Anti Chat",
 	Default = false,
 	Callback = function(Value)
