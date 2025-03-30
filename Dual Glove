@@ -1,0 +1,340 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Player = game.Players.LocalPlayer
+local Window = OrionLib:MakeWindow({Name = "Slap Farm By Gab Tv", HidePremium = false, SaveConfig = true, ConfigFolder = "Farm"})
+
+local bypass;
+    bypass = hookmetamethod(game, "__namecall", function(method, ...) 
+        if getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Ban then
+            return
+        elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.AdminGUI then
+            return
+            elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Kicker then
+            return
+        elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.WalkSpeedChanged then
+            return
+        end
+        return bypass(method, ...)
+    end)
+
+local Tab = Window:MakeTab({
+	Name = "Dual",
+	Icon = "rbxassetid://8834748103",
+	PremiumOnly = false
+})
+
+local function Shop1Hour()
+OrionLib:MakeNotification({Name = "Warning",Content = "You Will be Teleported to Another server after one Hour",Image = "rbxassetid://7733658504",Time = 5})
+end
+
+local function Shop30min()
+OrionLib:MakeNotification({Name = "Warning",Content = "You Will be Teleported to Another server after 30 minutes",Image = "rbxassetid://7733658504",Time = 5})
+end
+
+Tab:AddLabel("Credit to [ GabTv ]")
+Tab:AddLabel("Subcribe to Megaphonk266")
+Tab:AddLabel("Wellcome back " ..Player.Name.." ! ")
+Tab:AddLabel("Warning This Script Freeze When Someone Report")
+Tab:AddButton({
+	Name = "Server Hop = After 1Hour",
+	Callback = function()
+	Shop1Hour()
+	task.wait(3600)
+local serverList = {}
+
+for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+	if v.playing and type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
+		serverList[#serverList + 1] = v.id
+	end
+end
+
+if #serverList > 0 then
+	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverList[math.random(1, #serverList)])
+else
+    error("No servers found")
+end
+  	end    
+})
+Tab:AddButton({
+	Name = "Server Hop = After 30min",
+	Callback = function()
+	Shop30min()
+	task.wait(1800)
+local serverList = {}
+
+for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+	if v.playing and type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
+		serverList[#serverList + 1] = v.id
+	end
+end
+
+if #serverList > 0 then
+	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverList[math.random(1, #serverList)])
+else
+    error("No servers found")
+end
+  	end    
+})
+Tab:AddButton({
+	Name = "Server Hop",
+	Callback = function()
+local serverList = {}
+
+for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+	if v.playing and type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
+		serverList[#serverList + 1] = v.id
+	end
+end
+
+if #serverList > 0 then
+	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverList[math.random(1, #serverList)])
+else
+    error("No servers found")
+end
+  	end    
+})
+Tab:AddButton({
+	Name = "Use Dual Glove",
+	Callback = function()
+fireclickdetector(game.Workspace.Lobby.Dual.ClickDetector)
+  	end    
+})
+Tab:AddToggle({
+	Name = "Slap Farm Dual Glove Safe",
+	Default = false,
+	Callback = function(Value)
+Dual = Value
+while Dual do
+local players = game.Players:GetChildren()
+            local RandomPlayer = players[math.random(1, #players)]
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = RandomPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
+            wait(0.01)
+            game.ReplicatedStorage.GeneralHit:FireServer(RandomPlayer.Character:WaitForChild("HumanoidRootPart"))
+            wait()
+            game.ReplicatedStorage.GeneralHit:FireServer(RandomPlayer.Character:WaitForChild("HumanoidRootPart"))
+            wait()
+            game.ReplicatedStorage.GeneralHit:FireServer(RandomPlayer.Character:WaitForChild("HumanoidRootPart"))
+            wait()
+            game.ReplicatedStorage.GeneralHit:FireServer(RandomPlayer.Character:WaitForChild("HumanoidRootPart"))
+            wait()
+            game.ReplicatedStorage.GeneralHit:FireServer(RandomPlayer.Character:WaitForChild("HumanoidRootPart"))
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(17894.6855, -130.158478, -3539.8374, -0.993310213, -4.15437862e-09, 0.11547628, -4.47561899e-09, 1, -2.52259036e-09, -0.11547628, -3.02254266e-09, -0.993310213)
+            wait(2)
+end
+	end    
+})
+Tab:AddToggle({
+	Name = "Slap Farm Dual Glove Fast",
+	Default = false,
+	Callback = function(Value)
+Dual = Value
+while Dual do
+local players = game.Players:GetChildren()
+            local RandomPlayer = players[math.random(1, #players)]
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = RandomPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
+            wait(0.3)
+            game.ReplicatedStorage.GeneralHit:FireServer(RandomPlayer.Character:WaitForChild("HumanoidRootPart"))
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(17894.6855, -130.158478, -3539.8374, -0.993310213, -4.15437862e-09, 0.11547628, -4.47561899e-09, 1, -2.52259036e-09, -0.11547628, -3.02254266e-09, -0.993310213)
+            wait(0.3)
+end
+	end    
+})
+Tab:AddToggle({
+	Name = "Slapple Farm | Only Woks On Arena",
+	Default = false,
+	Callback = function(Value)
+SlappleFarm = Value
+while SlappleFarm do
+for i, v in ipairs(workspace.Arena.island5.Slapples:GetDescendants()) do
+                if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character:FindFirstChild("entered") and v.Name == "Glove" and v:FindFirstChildWhichIsA("TouchTransmitter") then
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
+        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 1)
+                end
+            end
+task.wait()
+end
+	end    
+})
+Tab:AddButton({
+	Name = "invisble",
+	Callback = function()
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil and game.Players.LocalPlayer.leaderstats.Slaps.Value >= 666 then
+OGlove = game.Players.LocalPlayer.leaderstats.Glove.Value
+fireclickdetector(workspace.Lobby.Ghost.ClickDetector)
+game.ReplicatedStorage.Ghostinvisibilityactivated:FireServer()
+fireclickdetector(workspace.Lobby[OGlove].ClickDetector)
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You need to be in lobby and have 666+ slaps.",Image = "rbxassetid://7733658504",Time = 5})
+end
+  	end    
+})
+
+local Tab2 = Window:MakeTab({
+	Name = "New!!",
+	Icon = "rbxassetid://8834748103",
+	PremiumOnly = false
+})
+AntiRecord = Tab2:AddToggle({
+	Name = "Anti Record Auto Kick",
+	Default = false,
+	Callback = function(Value)
+AntiRecord = Value
+	end    
+})
+for i,p in pairs(game.Players:GetChildren()) do
+if p ~= game.Players.LocalPlayer then
+p.Chatted:Connect(function(message)
+Words = message:split(" ")
+if AntiRecord == true then
+for i, v in pairs(Words) do
+if v:lower():match("recording") or v:lower():match(" rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match(" disco") or v:lower():match(" disc") or v:lower():match("ticket") or v:lower():match("tickets") or v:lower():match(" ds") or v:lower():match(" dc") or v:lower():match("dizzy") or v:lower():match("dizzycord") or v:lower():match(" clip") or v:lower():match("proof") or v:lower():match("evidence") then
+game.Players.LocalPlayer:Kick("Possible player recording detected.".." [ "..p.Name.." ]".." [ "..message.." ]")
+end
+end
+end
+end)
+end
+end
+game.Players.PlayerAdded:Connect(function(Player)
+Player.Chatted:Connect(function(message)
+Words = message:split(" ")
+if AntiRecord == true then
+for i, v in pairs(Words) do
+if v:lower():match("recording") or v:lower():match(" rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match(" disco") or v:lower():match(" disc") or v:lower():match("ticket") or v:lower():match("tickets") or v:lower():match(" ds") or v:lower():match(" dc") or v:lower():match("dizzy") or v:lower():match("dizzycord") or v:lower():match(" clip") or v:lower():match("proof") or v:lower():match("evidence") then
+game.Players.LocalPlayer:Kick("Possible player recording detected.".." [ "..Player.Name.." ]".." [ "..message.." ]")
+end
+end
+end
+end)
+end)
+
+Tab2:AddToggle({
+	Name = "Anti Roblox Void",
+	Default = false,
+	Callback = function(Value)
+if Value == true then
+for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
+                    if v.ClassName == "Part" and v.Name == "BLOCK" then
+                        v.CanTouch = false
+                    end
+                end
+workspace.DEATHBARRIER.CanTouch = false
+workspace.DEATHBARRIER2.CanTouch = false
+workspace.dedBarrier.CanTouch = false
+workspace.ArenaBarrier.CanTouch = false
+workspace.AntiDefaultArena.CanTouch = false
+else
+for i,v in pairs(game.Workspace.DEATHBARRIER:GetChildren()) do
+                    if v.ClassName == "Part" and v.Name == "BLOCK" then
+                        v.CanTouch = true
+                    end
+                end
+workspace.DEATHBARRIER.CanTouch = true
+workspace.DEATHBARRIER2.CanTouch = true
+workspace.dedBarrier.CanTouch = true
+workspace.ArenaBarrier.CanTouch = true
+workspace.AntiDefaultArena.CanTouch = true
+end
+	end    
+})
+Tab2:AddToggle({
+	Name = "Anti Kill cube",
+	Default = false,
+	Callback = function(Value)
+if Value == true then
+workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = false
+        else
+workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch = true
+        end
+	end    
+})
+Tab2:AddToggle({
+	Name = "Anti Timestop",
+	Default = false,
+	Callback = function(Value)
+AntiTimestop = Value
+while AntiTimestop do
+                for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                    if v.ClassName == "Part" then
+                        v.Anchored = false
+                    end
+                end
+task.wait()
+end
+	end    
+})
+Tab2:AddToggle({
+	Name = "Anti Pusher",
+	Default = false,
+	Callback = function(Value)
+AntiPusher = Value
+            while AntiPusher do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "wall" then
+                        v.CanCollide = false
+                    end
+                end
+task.wait(0.01)
+end
+	end    
+})
+Tab2:AddToggle({
+	Name = "Anti Custom | megarock",
+	Default = false,
+	Callback = function(Value)
+AntiRock = Value
+while AntiRock do
+for i,v in pairs(game.Workspace:GetDescendants()) do
+                    if v.Name == "rock" then
+                        v.CanTouch = false
+                        v.CanQuery = false
+                    end
+                end
+task.wait(0.1)
+end
+	end    
+})
+Tab2:AddToggle({
+	Name = "Anti Mail",
+	Default = false,
+	Callback = function(Value)
+game.Players.LocalPlayer.Character.YouHaveGotMail.Disabled = Value
+AntiMail = Value
+while AntiMail do
+if game.Players.LocalPlayer.Character:FindFirstChild("YouHaveGotMail") then
+        game.Players.LocalPlayer.Character.YouHaveGotMail.Disabled = true
+end
+task.wait(0.01)
+end
+	end    
+})
+Tab2:AddToggle({
+	Name = "Anti demension",
+	Default = false,
+	Callback = function(Value)
+AntiPortal = Value
+if AntiPortal == true then
+workspace.Lobby.Teleport2.CanTouch = false
+workspace.Lobby.Teleport3.CanTouch = false
+workspace.Lobby.Teleport4.CanTouch = false
+workspace.Lobby.Teleport6.CanTouch = false
+else
+workspace.Lobby.Teleport2.CanTouch = true
+workspace.Lobby.Teleport3.CanTouch = true
+workspace.Lobby.Teleport4.CanTouch = true
+workspace.Lobby.Teleport6.CanTouch = true
+end
+	end    
+})
+Tab2:AddToggle({
+	Name = "Anti Baloon",
+	Default = false,
+	Callback = function(Value)
+BL = Value
+while BL do
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PopBalloon"):FireServer()
+wait(0.1)
+end
+	end    
+})
