@@ -230,28 +230,15 @@ end
 Tab2:AddButton({
 	Name = "Godmode",
 	Callback = function()
-if game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil then
-firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1, 0)
-firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.Lobby.Teleport1, 1)
-end
-repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool") or game.Players.LocalPlayer.Backpack:FindFirstChildWhichIsA("Tool")
-for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-if v.ClassName == "Tool" then
-v.Parent = game.LogService
-end
-end
-for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-v.Parent = game.LogService
-end
-game:GetService("ReplicatedStorage"):WaitForChild("HumanoidDied"):FireServer(game.Players.LocalPlayer.Character,false)
-wait(3.75)
-for i,v in pairs(game.LogService:GetChildren()) do
-v.Parent = game.Players.LocalPlayer.Backpack
-end
-for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-end
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Origo.CFrame * CFrame.new(0,-5,0)
+loadstring(game:HttpGet("https://pastebin.com/raw/CwytuKgT"))()
+
+task.wait(0.001)
+
+loadstring(game:HttpGet("https://pastebin.com/raw/HFdzghJU"))()
+
+task.wait(3.99)
+
+loadstring(game:HttpGet("https://pastebin.com/raw/1DvJk2Mr"))()
   	end    
 })
 Tab2:AddToggle({
@@ -884,27 +871,7 @@ end
 	end    
 })
 Tab3:AddButton({
-	Name = "Anti Slap",
-	Callback = function()
-loadstring(game:HttpGet("https://pastebin.com/raw/CwytuKgT"))()
-
-task.wait(0.3)
-
-loadstring(game:HttpGet("https://pastebin.com/raw/HFdzghJU"))()
-
-task.wait(3.99)
-
-loadstring(game:HttpGet("https://pastebin.com/raw/1DvJk2Mr"))()
-  	end    
-})
-Tab3:AddButton({
-	Name = "Anti Void v1",
-	Callback = function()
-loadstring(game:HttpGet("https://pastebin.com/raw/JjmdAUcB"))() 
-  	end    
-})
-Tab3:AddButton({
-	Name = "Anti Void v2",
+	Name = "Load Anti Void Blocks",
 	Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/junexd12/junexd12/refs/heads/main/Anti%20void%20v2"))() 
   	end    
