@@ -931,29 +931,22 @@ for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
 end
 	end    
 })
-Tab3:AddButton({
-	Name = "Anti Acid",
-	Callback = function()
-local AntiAcid = Instance.new("Part", workspace)
-AntiAcid.Position = Vector3.new(-70, -20, -725)
-AntiAcid.Name = "AntiAcid"
-AntiAcid.Size = Vector3.new(155, 35, 144)
-AntiAcid.Anchored = true
-AntiAcid.Transparency = 1
-AntiLava.CanCollide = false
-  	end    
-})
-Tab3:AddButton({
-	Name = "Anti Lava",
-	Callback = function()
-local AntiLava = Instance.new("Part", workspace)
-AntiLava.Name = "AntiLava"
-AntiLava.Position = Vector3.new(-238, -43, 401)
-AntiLava.Size = Vector3.new(150,30,150)
-AntiLava.Anchored = true
-AntiLava.Transparency = 1
-AntiLava.CanCollide = false
-  	end    
+Tab3:AddToggle({
+	Name = "Anti Sbeve",
+	Default = false,
+	Callback = function(Value)
+		_G.AntiSbeve = Value
+while _G.AntiSbeve do
+for _,v in pairs(game.Players:GetChildren()) do
+                    if v ~= game.Players.LocalPlayer and v.Character:FindFirstChild("stevebody") then
+                        v.Character:FindFirstChild("stevebody").CanTouch = false
+                        v.Character:FindFirstChild("stevebody").CanQuery = false
+                        v.Character:FindFirstChild("stevebody").CanCollide = false
+                    end
+                end
+task.wait()
+end
+	end    
 })
 Tab3:AddToggle({
 	Name = "Anti knock off",
