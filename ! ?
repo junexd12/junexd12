@@ -1801,7 +1801,7 @@ local Tab7 = Window:MakeTab({
 	PremiumOnly = false
 })
 Tab7:AddTextbox({
-	Name = "E_Glove",
+	Name = "Equip Glove",
 	Default = "Glove name",
 	TextDisappear = true,
 	Callback = function(txt)
@@ -1845,6 +1845,53 @@ end
 end
   	end    
 })
+Tab7:AddTextbox({
+	Name = "Give Revive Player",
+	Default = "Username",
+	TextDisappear = false,
+	Callback = function(Value)
+if Value == "Me" or Value == "me" or Value == "Username" or Value == "" then
+SaveThePlayer = game.Players.LocalPlayer.Name
+else
+local targetAbbreviation = Value
+local targetPlayer
+for _, v in pairs(game.Players:GetPlayers()) do
+if string.sub(v.Name, 1, #targetAbbreviation):lower() == targetAbbreviation:lower() then
+targetPlayer = v
+break
+end
+end
+if targetPlayer then
+SaveThePlayer = targetPlayer.Name
+OrionLib:MakeNotification({Name = "Error",Content = "Found Player [ "..SaveThePlayer.." ]",Image = "rbxassetid://7733658504",Time = 5})
+else
+OrionLib:MakeNotification({Name = "Error",Content = "Can't find player",Image = "rbxassetid://7733658504",Time = 5})
+end
+end
+	end	  
+})
+
+SavePlayer = Tab7:AddToggle({
+	Name = "Auto Revive Player",
+	Default = false,
+	Callback = function(Value)
+if SaveThePlayer == nil then
+SaveThePlayer = game.Players.LocalPlayer.Name
+end
+GuardianAngelSpam = Value
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Guardian Angel" then
+while GuardianAngelSpam and game.Players.LocalPlayer.leaderstats.Glove.Value == "Guardian Angel" do
+game:GetService("ReplicatedStorage").GeneralAbility:FireServer(game.Players[SaveThePlayer])
+task.wait()
+end
+elseif GuardianAngelSpam == true then
+OrionLib:MakeNotification({Name = "Error",Content = "You don't have Guardian Angel equipped.",Image = "rbxassetid://7733658504",Time = 5})
+wait(0.05)
+SavePlayer:Set(false)
+end
+	end    
+})
+
 Tab7:AddButton({
 	Name = "invisble",
 	Callback = function()
