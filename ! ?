@@ -289,13 +289,33 @@ end
 	end
 })
 Tab2:AddToggle({
-	Name = "Spam Piano Drop | All Glove",
+	Name = "Spam Piano Drop On Top | All Glove",
 	Default = false,
 	Callback = function(state)
 	pianodrop = state
 while pianodrop do
 game:GetService("ReplicatedStorage").Piano:FireServer()
 task.wait(0.3)
+end
+	end
+})
+Tab2:AddToggle({
+	Name = "Spam Piano Drop On Others | All Glove",
+	Default = false,
+	Callback = function(state)
+	pianodrop = state
+while pianodrop do
+OGL = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+local players = game.Players:GetChildren()
+            local RandomPlayer = players[math.random(1, #players)]
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = RandomPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
+            wait(0.00000001)
+            game:GetService("ReplicatedStorage").Piano:FireServer()
+            wait(.30)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
+task.wait(6)
 end
 	end
 })
@@ -699,7 +719,7 @@ _G.PlayerChoose = Value
 })
 
 Tab2:AddTextbox({
-	Name = "Kill Player",
+	Name = "KILL Player",
 	Default = "Username",
 	TextDisappear = false,
 	Callback = function(Value)
