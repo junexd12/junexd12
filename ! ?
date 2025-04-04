@@ -818,6 +818,23 @@ local Tab3 = Window:MakeTab({
 	Icon = "rbxassetid://8834748103",
 	PremiumOnly = false
 })
+Tab3:AddToggle({
+	Name = "Anti Mod Admin (i Added Auto Kick If Tencell Join)",
+	Default = false,
+	Callback = function(Value)
+_G.AntiMods = Value
+while _G.AntiMods do
+for i,v in pairs(game.Players:GetChildren()) do
+        if v:GetRankInGroup(9950771) >= 2 then
+         _G.AntiKick = false
+     game.Players.LocalPlayer:Kick("High Rank Player Detected.".." [ "..v.Name.." ]")
+   break
+     end
+end
+task.wait()
+end
+	end    
+})
 AntiRecord = Tab3:AddToggle({
 	Name = "Anti Record Auto Kick",
 	Default = false,
@@ -962,6 +979,32 @@ else
 for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
                         v.CanTouch = true
                 end
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Obby (Lava Block)",
+	Default = false,
+	Callback = function(Value)
+		_G.AntiObby = Value
+while _G.AntiObby do
+for _, v in pairs(game.Workspace:GetChildren()) do
+          if string.find(v.Name, "LavaSpinner") or string.find(v.Name, "LavaBlock") then
+             if v.CanTouch == true then
+                 v.CanTouch = false
+             end
+         end
+     end
+task.wait()
+end
+if _G.AntiObby == false then
+for _, v in pairs(game.Workspace:GetChildren()) do
+          if string.find(v.Name, "LavaSpinner") or string.find(v.Name, "LavaBlock") then
+              if v.CanTouch == false then
+                  v.CanTouch = true
+             end
+         end
+    end
 end
 	end    
 })
