@@ -818,6 +818,40 @@ local Tab3 = Window:MakeTab({
 	Icon = "rbxassetid://8834748103",
 	PremiumOnly = false
 })
+AntiRecord = Tab3:AddToggle({
+	Name = "Anti Record Auto Kick",
+	Default = false,
+	Callback = function(Value)
+AntiRecord = Value
+	end    
+})
+for i,p in pairs(game.Players:GetChildren()) do
+if p ~= game.Players.LocalPlayer then
+p.Chatted:Connect(function(message)
+Words = message:split(" ")
+if AntiRecord == true then
+for i, v in pairs(Words) do
+if v:lower():match("recording") or v:lower():match(" rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match(" disco") or v:lower():match(" disc") or v:lower():match("ticket") or v:lower():match("tickets") or v:lower():match(" ds") or v:lower():match(" dc") or v:lower():match("dizzy") or v:lower():match("dizzycord") or v:lower():match(" clip") or v:lower():match("proof") or v:lower():match("evidence") then
+game.Players.LocalPlayer:Kick("Possible player recording detected.".." [ "..p.Name.." ]".." [ "..message.." ]")
+end
+end
+end
+end)
+end
+end
+game.Players.PlayerAdded:Connect(function(Player)
+Player.Chatted:Connect(function(message)
+Words = message:split(" ")
+if AntiRecord == true then
+for i, v in pairs(Words) do
+if v:lower():match("recording") or v:lower():match(" rec") or v:lower():match("record") or v:lower():match("discor") or v:lower():match(" disco") or v:lower():match(" disc") or v:lower():match("ticket") or v:lower():match("tickets") or v:lower():match(" ds") or v:lower():match(" dc") or v:lower():match("dizzy") or v:lower():match("dizzycord") or v:lower():match(" clip") or v:lower():match("proof") or v:lower():match("evidence") then
+game.Players.LocalPlayer:Kick("Possible player recording detected.".." [ "..Player.Name.." ]".." [ "..message.." ]")
+end
+end
+end
+end)
+end)
+
 Tab3:AddToggle({
 	Name = "Anti kick",
 	Default = false,
@@ -917,7 +951,7 @@ workspace.Arena.CubeOfDeathArea["the cube of death(i heard it kills)"].CanTouch 
 	end    
 })
 Tab3:AddToggle({
-	Name = "Anti Brazil",
+	Name = "Anti Brazil (Portal)",
 	Default = false,
 	Callback = function(Value)
 if Value == true then
@@ -928,6 +962,28 @@ else
 for i,v in pairs(game.Workspace.Lobby.brazil:GetChildren()) do
                         v.CanTouch = true
                 end
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Run",
+	Default = false,
+	Callback = function(Value)
+_G.AutoExit = Value
+while _G.AutoExit do
+if game.Players.LocalPlayer.Character:FindFirstChild("InLabyrinth") ~= nil then
+for _, v in next, workspace:GetChildren() do
+    if string.find(v.Name, "Labyrinth") and v:FindFirstChild("Doors") then
+        for _, y in ipairs(v.Doors:GetChildren()) do
+            if y:FindFirstChild("Hitbox") and y.Hitbox:FindFirstChild("TouchInterest") then
+              firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), y.Hitbox, 0)
+              firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), y.Hitbox, 1)
+            end
+        end
+    end
+end
+end
+task.wait()
 end
 	end    
 })
@@ -979,7 +1035,7 @@ getgenv().antiicesb = state
 	end    
 })
 Tab3:AddToggle({
-	Name = "Anti timestop + no stun",
+	Name = "Anti Time Stop (Stop)",
 	Default = false,
 	Callback = function(Value)
 AntiTimestop = Value
@@ -994,17 +1050,101 @@ end
 	end    
 })
 Tab3:AddToggle({
-	Name = "Anti brick",
+	Name = "Anti Za Hando Pull",
 	Default = false,
 	Callback = function(Value)
-AntiBrick = Value
-while AntiBrick do
+	_G.AntiZaHando = Value
+            while _G.AntiZaHando do
+                for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.ClassName == "Part" and v.Name == "Part" then
+                        v:Destroy()
+                    end
+                end
+task.wait()
+            end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Fort (No Clip Fort Wall)",
+	Default = false,
+	Callback = function(Value)
+	_G.AntiFort = Value
+            while _G.AntiFort do
+                for i,v in pairs(game.Workspace:GetChildren()) do
+                    if v.Name == "Part" then
+                        v.CanCollide = false
+                    end
+                end
+task.wait()
+            end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Brick",
+	Default = false,
+	Callback = function(Value)
+_G.AntiBrick = Value
+while _G.AntiBrick do
 for i,v in pairs(game.Workspace:GetChildren()) do
                     if v.Name == "Union" then
                         v.CanTouch = false
+                        v.CanQuery = false
                     end
                 end
-task.wait(0.01)
+task.wait()
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Plank (Attack)",
+	Default = false,
+	Callback = function(Value)
+	_G.AntiPlank = Value
+while _G.AntiPlank do
+for i,v in pairs(game.Workspace:GetChildren()) do
+                    if string.find(v.Name, "'s Plank") and v.ClassName == "Part" then
+                         v.CanTouch = false
+                         v.CanQuery = false
+                     end
+                end
+task.wait()
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Bubble Grab",
+	Default = false,
+	Callback = function(Value)
+		 _G.AntiBubble = Value
+while _G.AntiBubble do
+for i,v in pairs(workspace:GetChildren()) do
+                    if v.Name == "BubbleObject" and v:FindFirstChild("Weld") then
+                        v:FindFirstChild("Weld"):Destroy()
+                    end
+               end
+task.wait()
+end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Anti Run",
+	Default = false,
+	Callback = function(Value)
+_G.AutoExit = Value
+while _G.AutoExit do
+if game.Players.LocalPlayer.Character:FindFirstChild("InLabyrinth") ~= nil then
+for _, v in next, workspace:GetChildren() do
+    if string.find(v.Name, "Labyrinth") and v:FindFirstChild("Doors") then
+        for _, y in ipairs(v.Doors:GetChildren()) do
+            if y:FindFirstChild("Hitbox") and y.Hitbox:FindFirstChild("TouchInterest") then
+              firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), y.Hitbox, 0)
+              firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), y.Hitbox, 1)
+            end
+        end
+    end
+end
+end
+task.wait()
 end
 	end    
 })
