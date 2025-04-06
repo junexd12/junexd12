@@ -20,6 +20,39 @@ local Tab = Window:MakeTab({
 	Icon = "rbxassetid://8834748103",
 	PremiumOnly = false
 })
+
+ local function spin100()
+power = 500 -- change this to make it more or less powerful
+
+game:GetService('RunService').Stepped:connect(function()
+game.Players.LocalPlayer.Character.Head.CanCollide = false
+game.Players.LocalPlayer.Character.UpperTorso.CanCollide = false
+game.Players.LocalPlayer.Character.LowerTorso.CanCollide = false
+game.Players.LocalPlayer.Character.HumanoidRootPart.CanCollide = false
+end)
+wait(.1)
+local bambam = Instance.new("BodyThrust")
+bambam.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+bambam.Force = Vector3.new(power,0,power)
+bambam.Location = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+end
+
+local function spin0()
+power = -1 -- change this to make it more or less powerful
+
+game:GetService('RunService').Stepped:connect(function()
+game.Players.LocalPlayer.Character.Head.CanCollide = false
+game.Players.LocalPlayer.Character.UpperTorso.CanCollide = false
+game.Players.LocalPlayer.Character.LowerTorso.CanCollide = false
+game.Players.LocalPlayer.Character.HumanoidRootPart.CanCollide = false
+end)
+wait(.1)
+local bambam = Instance.new("BodyThrust")
+bambam.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+bambam.Force = Vector3.new(power,0,power)
+bambam.Location = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+end
+
 Tab:AddLabel("Credit to [ GabTv ]")
 Tab:AddLabel("Subcribe to Megaphonk266")
 Tab:AddLabel("Wellcome back " ..Player.Name.." ! ")
@@ -298,7 +331,7 @@ local players = game.Players:GetChildren()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = RandomPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
             wait(0.00000001)
             game:GetService("ReplicatedStorage").Piano:FireServer()
-            wait(.30)
+            wait(.40)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
@@ -706,7 +739,7 @@ _G.PlayerChoose = Value
 })
 
 Tab2:AddTextbox({
-	Name = "KILL Player",
+	Name = "KILL Player (Swapper)",
 	Default = "Username",
 	TextDisappear = false,
 	Callback = function(Value)
@@ -728,7 +761,7 @@ end
 })
 
 Tab2:AddButton({
-	Name = "Kill Player",
+	Name = "KILL Player (Swapper)",
 	Callback = function()
 if _G.PlayerChoose == "Username" then
 if game.Players.LocalPlayer.Character:FindFirstChild("Swapper") or game.Players.LocalPlayer.Backpack:FindFirstChild("Swapper") then
@@ -776,6 +809,36 @@ end
 end
   	end    
 })
+Tab2:AddButton({
+	Name = "Bring Random Player (Swapper)",
+	Callback = function()
+	OGL = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+game:GetService("ReplicatedStorage").SLOC:FireServer()
+wait(.29)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
+  	end    
+})
+Tab2:AddButton({
+	Name = "Kill Multi Player (Za Hando) Warning Turn On Anti Void",
+	Callback = function()
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Za Hando" then
+OGL = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Origo.CFrame * CFrame.new(-302.9,-8.59,0.07)
+task.wait(0.3)
+spin100()
+task.wait(1)
+game:GetService("ReplicatedStorage").Erase:FireServer()
+task.wait(3)
+spin0()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = OGL
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You don't have Za Hando equipped.",Image = "rbxassetid://7733658504",Time = 5})
+end
+  	end    
+})
 Tab2:AddToggle({
 	Name = "Auto Spawn | Arena",
 	Default = false,
@@ -819,7 +882,7 @@ local Tab3 = Window:MakeTab({
 	PremiumOnly = false
 })
 Tab3:AddToggle({
-	Name = "Anti Mod Admin (i Added Auto Kick If Tencell Join)",
+	Name = "Anti Admin (Auto Kick If Some Player Has Highrank)",
 	Default = false,
 	Callback = function(Value)
 _G.AntiMods = Value
@@ -1433,7 +1496,7 @@ end
 	end    
 })
 Tab10:AddToggle({
-	Name = "No NameTag Visual",
+	Name = "Hide NameTag Visual",
 	Default = false,
 	Callback = function(state)
 getgenv().removenametag = state
@@ -1445,6 +1508,20 @@ getgenv().removenametag = state
         task.wait(0.3)
         end
 	end    
+})
+Tab10:AddToggle({
+	Name = "Hide Slap Visual",
+	Default = false,
+	Callback = function(state)
+hideslap = state
+local player = game.Players.LocalPlayer
+local hum = player.Character.HumanoidRootPart
+local slaps = player.leaderstats.Slaps
+while hideslap do
+slaps.Value = slaps.Value +99999999999999999999999999999999999999999999999
+task.wait(0.0000001)
+end
+  	end    
 })
 Tab10:AddButton({
 	Name = "No Lag",
@@ -1588,6 +1665,7 @@ for i,v in pairs(game.Players:GetChildren()) do
 end
 	end    
 })
+
 
 local Tab11 = Window:MakeTab({
 	Name = "Player",
@@ -1879,10 +1957,52 @@ OrionLib:MakeNotification({Name = "Error",Content = "You need 5k slaps.",Image =
        end    
 })
 Tab5:AddButton({
-	Name = "Get Poltergeist | Glove",
+	Name = "Get Warp | Glove",
 	Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/AutoGetPoltergeist/main/main.lua'))()
-       end    
+if game.Players.LocalPlayer.leaderstats.Glove.Value == "Swapper" and not game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer.UserId, 2124914780) then
+if _G.ClosestMagnitude == nil then
+_G.ClosestMagnitude = 999999
+end
+repeat
+for _, v in pairs(game.Players:GetPlayers()) do
+if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("entered") then
+local Magnitude = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+if Magnitude <= _G.ClosestMagnitude then
+if v.Character:FindFirstChild("entered") == nil or v.Character.Humanoid.Health == 0 then
+_G.ClosestMagnitude = 999999
+RandomPlayer = nil
+else
+_G.ClosestMagnitude = Magnitude
+RandomPlayer = v
+end
+end
+end
+end
+if RandomPlayer and _G.ClosestMagnitude ~= 999999 then
+if RandomPlayer ~= game.Players.LocalPlayer and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and RandomPlayer.Character then
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") and RandomPlayer.Character:FindFirstChild("entered") and RandomPlayer.Character:FindFirstChild("HumanoidRootPart") and RandomPlayer.Character.Ragdolled.Value == false then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = RandomPlayer.Character:FindFirstChild("Head").CFrame
+wait(0.17)
+game.ReplicatedStorage.HitSwapper:FireServer(RandomPlayer.Character:WaitForChild("Head"))
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace["SafeBox"].CFrame * CFrame.new(0,5,0)
+end
+end
+end
+task.wait(0.15)
+until RandomPlayer.Character.HumanoidRootPart.Position.Y < -10
+wait(0.2)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = RandomPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(0,10,0)
+wait(0.15)
+game:GetService("ReplicatedStorage").SLOC:FireServer()
+wait(0.2)
+if _G.ClosestMagnitude and RandomPlayer then
+_G.ClosestMagnitude = nil
+RandomPlayer = nil
+end
+else
+OrionLib:MakeNotification({Name = "Error",Content = "You don't have Swapper equipped, or you have owner badge",Image = "rbxassetid://7733658504",Time = 5})
+end
+  	end    
 })
 Tab5:AddButton({
 	Name = "Get Bomb | Glove",
@@ -1903,40 +2023,7 @@ if game.Players.LocalPlayer.leaderstats.Glove.Value == "Warp" and game.Players.L
         end
        end    
 })
-Tab5:AddLabel("my side ends here")
-Tab5:AddLabel("Nexer side")
-Tab5:AddButton({
-	Name = "Get Fan + boxer | Glove",
-	Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/autogetfanboxer/main/main.lua'))()
-       end    
-})
-Tab5:AddButton({
-	Name = "Get Hexagon | Glove",
-	Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/AutoGetHexagon/refs/heads/main/OpenSource.lua'))()
-       end    
-})
-Tab5:AddButton({
-	Name = "Get Mouse | Glove",
-	Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/AutoGetMouse/refs/heads/main/OpenSource.lua'))()
-       end    
-})
-Tab5:AddDropdown({
-	Name = "Get badge v2 if the bottons doesn't work use this",
-	Default = "None",
-	Options = {"Mouse", "Hexagon", "Fan and Boxer Glove"},
-	Callback = function(Value)
-if Value == "Mouse" then
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/AutoGetMouse/refs/heads/main/OpenSource.lua'))()
-elseif Value == "Hexagon" then
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/AutoGetHexagon/refs/heads/main/OpenSource.lua'))()
-elseif Value == "Fan and Boxer Glove" then
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro666Pro/autogetfanboxer/main/main.lua'))()
-end
-	end    
-})
+
 
 local Tab7 = Window:MakeTab({
 	Name = "Gloves",
