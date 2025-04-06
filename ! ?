@@ -1673,6 +1673,36 @@ local Tab11 = Window:MakeTab({
 	PremiumOnly = false
 })
 Tab11:AddSlider({
+	Name = "Fov (Changer)",
+	Min = 0,
+	Max = 300,
+	Default = 80,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "FEILD OF VIEW",
+	Callback = function(Value)
+game.Workspace.Camera.FieldOfView = Value
+FieldOfView = Value
+	end    
+})
+
+Tab11:AddTextbox({
+	Name = "Fov (Changer)",
+	Default = "UserFov",
+	TextDisappear = false,
+	Callback = function(Value)
+game.Workspace.Camera.FieldOfView = Value
+FieldOfView = Value
+	end	  
+})
+Tab11:AddButton({
+	Name = "Reset Fov",
+	Callback = function()
+game.Workspace.Camera.FieldOfView = 80
+FieldOfView = 80
+  	end    
+})
+Tab11:AddSlider({
 	Name = "WalkSpeed",
 	Min = 20,
 	Max = 1000,
@@ -1695,7 +1725,13 @@ game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
 Walkspeed = Value
 	end	  
 })
-
+Tab11:AddButton({
+	Name = "Reset Walkspeed",
+	Callback = function()
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 20
+Walkspeed = 20
+  	end    
+})
 Tab11:AddToggle({
 	Name = "Walkspeed Set Auto",
 	Default = false,
@@ -1733,7 +1769,13 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
 Jumppower = Value
 	end	  
 })
-
+Tab11:AddButton({
+	Name = "Reset Jumppower",
+	Callback = function()
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+Jumppower = 50
+  	end    
+})
 Tab11:AddToggle({
 	Name = "Jumppower Set Auto",
 	Default = false,
@@ -1771,7 +1813,13 @@ game.Players.LocalPlayer.Character.Humanoid.HipHeight = Value
 HipHeight = Value
 	end	  
 })
-
+Tab11:AddButton({
+	Name = "Reset Height",
+	Callback = function()
+game.Players.LocalPlayer.Character.Humanoid.HipHeight = 0
+HipHeight = 0
+  	end    
+})
 Tab11:AddToggle({
 	Name = "Hip Height Set Auto",
 	Default = false,
@@ -1799,7 +1847,22 @@ game.Workspace.Gravity = Value
 Gravity = Value
 	end    
 })
-
+Tab11:AddTextbox({
+	Name = "Gravity",
+	Default = "UserGravity",
+	TextDisappear = false,
+	Callback = function(Value)
+game.Workspace.Gravity = Value
+Gravity = Value
+	end	  
+})
+Tab11:AddButton({
+	Name = "Reset Gravity",
+	Callback = function()
+game.Workspace.Gravity = 193
+Gravity = 193
+  	end    
+})
 Tab11:AddToggle({
 	Name = "Gravity Set Auto",
 	Default = false,
