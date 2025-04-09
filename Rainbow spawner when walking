@@ -1,0 +1,129 @@
+-- Rainbow Platform Walker Exploit Script
+-- This script will spawn rainbow platforms under the player's feet while walking
+-- and destroy them after a short time
+
+-- Configuration (feel free to change these values)
+local PLATFORM_SIZE = Vector3.new(6, 1, 6)  -- Width, Height, Depth
+local PLATFORM_TRANSPARENCY = 0.3  -- Slightly transparent
+local PLATFORM_LIFETIME = 10  -- How long platforms last in seconds
+local SPAWN_DELAY = 0  -- Time between platform spawns while walking
+
+-- Variables to track state
+local isWalking = false
+local lastPlatformTime = 0
+local platformCount = 0
+
+-- Function to create a rainbow color that cycles
+local function getRainbowColor(offset)
+    local frequency = 0.8
+    local time = tick() + (offset or 0)
+    
+    local r = math.sin(frequency * time + 0) * 127 + 128
+    local g = math.sin(frequency * time + 2) * 127 + 128
+    local b = math.sin(frequency * time + 4) * 127 + 128
+    
+    return Color3.fromRGB(r, g, b)
+end
+
+-- Function to update platform colors with rainbow effect
+local function updatePlatformColors()
+    local platforms = workspace:GetChildren()
+    for _, obj in pairs(platforms) do
+        if obj:IsA("Part") and obj.Name == "RainbowPlatform" then
+            -- Each platform gets a slightly different color in the rainbow
+            obj.Color = getRainbowColor(obj:GetAttribute("ColorOffset"))
+        end
+    end
+end
+
+-- Function to create a new platform
+local function createPlatform()
+    -- Get the local player and their character
+    local player = game.Players.LocalPlayer
+    if not player then return end
+    
+    local character = player.Character
+    if not character then return end
+    
+    local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+    if not humanoidRootPart then return end
+    
+    -- Create the platform part
+    local platform = Instance.new("Part")
+    platform.Size = PLATFORM_SIZE
+    platform.Anchored = true
+    platform.CanCollide = true
+    platform.Transparency = PLATFORM_TRANSPARENCY
+    
+    -- Set unique color offset for this platform
+    platformCount = platformCount + 1
+    local colorOffset = platformCount * 0.1
+    platform:SetAttribute("ColorOffset", colorOffset)
+    platform.Color = getRainbowColor(colorOffset)
+    
+    platform.Material = Enum.Material.Neon
+    platform.Name = "RainbowPlatform"
+    
+    -- Position the platform slightly below the player's feet
+    local position = humanoidRootPart.Position
+    platform.Position = Vector3.new(position.X, position.Y - 3.5, position.Z)
+    
+    -- Parent the platform to the workspace
+    platform.Parent = game.Workspace
+    
+    -- Destroy the platform after the lifetime
+    spawn(function()
+        wait(PLATFORM_LIFETIME)
+        platform:Destroy()
+    end)
+    
+    return platform
+end
+
+-- Main script logic
+local function setupWalkingDetection()
+    local player = game.Players.LocalPlayer
+    if not player then return end
+    
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Function to check if player is walking
+    local function checkWalking()
+        if humanoid.MoveDirection.Magnitude > 0 then
+            -- Player is moving
+            if not isWalking then
+                isWalking = true
+            end
+        else
+            -- Player stopped moving
+            isWalking = false
+        end
+    end
+    
+    -- Run the walking check and platform spawn logic
+    spawn(function()
+        while wait(0.01) do
+            checkWalking()
+            
+            if isWalking and tick() - lastPlatformTime > SPAWN_DELAY then
+                createPlatform()
+                lastPlatformTime = tick()
+            end
+            
+            -- Update rainbow colors for all platforms
+            updatePlatformColors()
+        end
+    end)
+    
+    -- Connect to character respawn
+    player.CharacterAdded:Connect(function(newCharacter)
+        character = newCharacter
+        humanoid = newCharacter:WaitForChild("Humanoid")
+    end)
+end
+
+-- Start the script
+setupWalkingDetection()
+
+print("Rainbow platform walking script is now running! Walk around to spawn colorful platforms.")
