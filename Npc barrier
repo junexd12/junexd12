@@ -1,0 +1,50 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+-- Configuration
+local wallCount = 99999      -- Number of walls
+local radius = 15        -- Distance from player
+local rotationSpeed = 50  -- Speed multiplier
+local wallColor = Color3.fromRGB(0, 0, 0)  -- Red color
+
+-- Setup for target player
+local player = Players.LocalPlayer
+local walls = {}
+
+-- Create the walls
+for i = 1, wallCount do
+    local wall = Instance.new("Part")
+    wall.Anchored = true
+    wall.CanCollide = true
+    wall.Transparency = 10
+    wall.Size = Vector3.new(9, 50, 1)
+    wall.BrickColor = BrickColor.new(wallColor)
+    wall.Material = Enum.Material.Neon
+    wall.Parent = workspace
+    
+    table.insert(walls, wall)
+end
+
+-- Update wall positions
+RunService.RenderStepped:Connect(function(deltaTime)
+    if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+        return
+    end
+    
+    local playerPos = player.Character.HumanoidRootPart.Position
+    local angle = tick() * rotationSpeed
+    
+    for i, wall in ipairs(walls) do
+        local wallAngle = angle + ((i-1) * (2 * math.pi / wallCount))
+        local offset = Vector3.new(
+            math.cos(wallAngle) * radius,
+            0,
+            math.sin(wallAngle) * radius
+        )
+        
+        wall.Position = playerPos + offset
+        wall.CFrame = CFrame.lookAt(wall.Position, playerPos)
+    end
+end)
+
+print("Spinning walls activated!")
