@@ -2,10 +2,10 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
 -- Configuration
-local wallCount = 99999      -- Number of walls
-local radius = 15        -- Distance from player
-local rotationSpeed = 50  -- Speed multiplier
-local wallColor = Color3.fromRGB(0, 0, 0)  -- Red color
+local wallCount = 200
+local radius = 15
+local rotationSpeed = 50  
+local wallColor = Color3.fromRGB(0, 0, 0)
 
 -- Setup for target player
 local player = Players.LocalPlayer
@@ -17,7 +17,7 @@ for i = 1, wallCount do
     wall.Anchored = true
     wall.CanCollide = true
     wall.Transparency = 10
-    wall.Size = Vector3.new(9, 50, 1)
+    wall.Size = Vector3.new(9, 35, 1)
     wall.BrickColor = BrickColor.new(wallColor)
     wall.Material = Enum.Material.Neon
     wall.Parent = workspace
