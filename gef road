@@ -99,10 +99,19 @@ local Tab4 = Window:CreateTab("Misc", 4483362458) -- Title, Image
 
 local Tab5 = Window:CreateTab("Character", 4483362458) -- Title, Image
 local Section = Tab5:CreateSection("Teleports")
+local Button = Tab5:CreateButton({
+   Name = "Mark Position",
+   Callback = function()
+MarkTp = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+   end,
+})
 
-
-
-
+local Button = Tab5:CreateButton({
+   Name = "Teleport To Marked Position",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = MarkTp
+   end,
+})
 
 local Section = Tab5:CreateSection("Movement And Visual")
 local Slider = Tab5:CreateSlider({
@@ -117,12 +126,22 @@ game.Workspace.Camera.FieldOfView = Value
 FieldOfView = Value
    end,
 })
-
+local Input = Tab5:CreateInput({
+   Name = "Fov (Changer)",
+   CurrentValue = "80",
+   PlaceholderText = "Value",
+   RemoveTextAfterFocusLost = true,
+   Flag = "Fov2",
+   Callback = function(Value)
+game.Workspace.Camera.FieldOfView = Value
+FieldOfView = Value
+   end,
+})
 
 
 
 local Slider = Tab5:CreateSlider({
-   Name = "Walk speed",
+   Name = "Walkspeed",
    Range = {0, 1000},
    Increment = 0.1,
    Suffix = "Speed",
@@ -133,7 +152,31 @@ game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
 Walkspeed = Value
    end,
 })
-
+local Input = Tab5:CreateInput({
+   Name = "Walkspeed",
+   CurrentValue = "18",
+   PlaceholderText = "Value",
+   RemoveTextAfterFocusLost = true,
+   Flag = "Walkspeed2",
+   Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+Walkspeed = Value
+   end,
+})
+local Toggle = Tab5:CreateToggle({
+   Name = "Keep Walkspeed",
+   CurrentValue = false,
+   Flag = "WSKeep", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+KeepWalkspeed = Value
+            while KeepWalkspeed do
+                if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Players.LocalPlayer.Character.Humanoid.WalkSpeed ~= Walkspeed then
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Walkspeed
+                end
+task.wait()
+            end
+   end,
+})
 
 
 
@@ -150,7 +193,31 @@ game.Players.LocalPlayer.Character.Humanoid.HipHeight = Value
 HipHeight = Value
    end,
 })
-
+local Input = Tab5:CreateInput({
+   Name = "Hips height",
+   CurrentValue = "2",
+   PlaceholderText = "Value",
+   RemoveTextAfterFocusLost = true,
+   Flag = "HipValue1",
+   Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid.HipHeight = Value
+HipHeight = Value
+   end,
+})
+local Toggle = Tab5:CreateToggle({
+   Name = "Keep Hips height",
+   CurrentValue = false,
+   Flag = "HHKeep", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+KeepHipHeight = Value
+           while KeepHipHeight do
+              if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Players.LocalPlayer.Character.Humanoid.HipHeight ~= HipHeight then
+                  game.Players.LocalPlayer.Character.Humanoid.HipHeight  = HipHeight
+              end
+task.wait()
+         end
+   end,
+})
 
 
 
@@ -167,7 +234,31 @@ game.Workspace.Gravity = Value
 Gravity = Value
    end,
 })
-
+local Input = Tab5:CreateInput({
+   Name = "Gravity",
+   CurrentValue = "193",
+   PlaceholderText = "Value",
+   RemoveTextAfterFocusLost = true,
+   Flag = "Gravity2",
+   Callback = function(Value)
+game.Workspace.Gravity = Value
+Gravity = Value
+   end,
+})
+local Toggle = Tab5:CreateToggle({
+   Name = "Keep Gravity",
+   CurrentValue = false,
+   Flag = "GKeep", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+KeepGravity = Value
+           while KeepGravity do
+              if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") ~= nil and game.Workspace.Gravity ~= nil and game.Workspace.Gravity ~= Gravity then
+                  game.Workspace.Gravity = Gravity
+              end
+task.wait()
+         end
+   end,
+})
 
 
 
@@ -220,6 +311,6 @@ end
 
 
 local Tab7 = Window:CreateTab("Credits", 4483362458) -- Title, Image
-local Label = Tab7:CreateLabel("Credits to Megaphonk266", 4483362458, Color3.fromRGB(255, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
+local Label = Tab7:CreateLabel("Credits to Megaphonk266", 4483362458, Color3.fromRGB(0, 0, 0), false) -- Title, Icon, Color, IgnoreTheme
 local Paragraph = Tab7:CreateParagraph({Title = "Thanks For Using My Script", Content = "I Really Appreciate !"})
 
