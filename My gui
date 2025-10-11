@@ -1,0 +1,405 @@
+-- GabRayfield.lua - single-file UI library (paste raw and load with loadstring)
+return (function()
+	local Players = game:GetService("Players")
+	local UserInput = game:GetService("UserInputService")
+	local RunService = game:GetService("RunService")
+	local player = Players.LocalPlayer
+
+	local Library = {}
+	Library.__index = Library
+
+	-- helpers
+	local function new(class, props)
+		local obj = Instance.new(class)
+		for k,v in pairs(props or {}) do
+			if k == "Parent" then obj.Parent = v else pcall(function() obj[k] = v end) end
+		end
+		return obj
+	end
+
+	local function makeCorner(parent, radius)
+		local c = Instance.new("UICorner", parent)
+		c.CornerRadius = UDim.new(0, radius or 10)
+		return c
+	end
+
+	local function isExecutorWriteable()
+		return (type(writefile) == "function" or type(isfile) == "function")
+	end
+
+	-- basic theme
+	local THEME = {
+		Background = Color3.fromRGB(24,24,24),
+		Card = Color3.fromRGB(36,36,36),
+		Accent = Color3.fromRGB(0,200,0),
+		Text = Color3.fromRGB(255,255,255),
+		SubText = Color3.fromRGB(180,180,180),
+	}
+
+	-- CreateWindow(config)
+	function Library:CreateWindow(config)
+		config = config or {}
+		local titleText = config.Name or "GabUI"
+		local keybind = config.ToggleUIKeybind or "K"
+
+		-- ScreenGui
+		local gui = Instance.new("ScreenGui")
+		gui.Name = "GabUI_" .. tostring(titleText)
+		gui.ResetOnSpawn = false
+		gui.Parent = player:WaitForChild("PlayerGui")
+
+		-- Main frame
+		local main = new("Frame", {
+			Parent = gui,
+			Size = UDim2.new(0, 320, 0, 420),
+			Position = UDim2.new(0.5, -160, 0.15, 0),
+			BackgroundColor3 = THEME.Background,
+			Active = true,
+			Draggable = true,
+		})
+		makeCorner(main, 12)
+
+		-- Top bar
+		local top = new("Frame", {
+			Parent = main,
+			Size = UDim2.new(1,0,0,48),
+			Position = UDim2.new(0,0,0,0),
+			BackgroundTransparency = 1,
+		})
+		local title = new("TextLabel", {
+			Parent = top,
+			Text = titleText,
+			Size = UDim2.new(1, -60, 1, 0),
+			Position = UDim2.new(0, 8, 0, 8),
+			BackgroundTransparency = 1,
+			TextColor3 = THEME.Text,
+			Font = Enum.Font.SourceSansBold,
+			TextSize = 18,
+			TextXAlignment = Enum.TextXAlignment.Left,
+		})
+		local toggleBtn = new("TextButton", {
+			Parent = top,
+			Size = UDim2.new(0, 44, 0, 28),
+			Position = UDim2.new(1, -52, 0, 10),
+			BackgroundColor3 = Color3.fromRGB(255,255,255),
+			Text = "Hide",
+			TextColor3 = Color3.fromRGB(0,0,0),
+			AutoButtonColor = true,
+		})
+		makeCorner(toggleBtn, 8)
+
+		-- Tab bar
+		local tabBar = new("Frame", {
+			Parent = main,
+			Size = UDim2.new(1, -12, 0, 36),
+			Position = UDim2.new(0,6,0,54),
+			BackgroundTransparency = 1,
+		})
+		local tabLayout = new("UIListLayout", {Parent = tabBar})
+		tabLayout.FillDirection = Enum.FillDirection.Horizontal
+		tabLayout.SortOrder = Enum.SortOrder.LayoutOrder
+		tabLayout.Padding = UDim.new(0,6)
+
+		-- Content holder
+		local content = new("Frame", {
+			Parent = main,
+			Size = UDim2.new(1, -12, 1, -110),
+			Position = UDim2.new(0,6,0,96),
+			BackgroundColor3 = THEME.Card,
+		})
+		makeCorner(content, 10)
+
+		local contentScroll = new("ScrollingFrame", {
+			Parent = content,
+			Size = UDim2.new(1, -10, 1, -10),
+			Position = UDim2.new(0,5,0,5),
+			AutomaticCanvasSize = Enum.AutomaticSize.Y,
+			ScrollBarThickness = 6,
+			BackgroundTransparency = 1,
+		})
+		local contentLayout = new("UIListLayout", {Parent = contentScroll})
+		contentLayout.SortOrder = Enum.SortOrder.LayoutOrder
+		contentLayout.Padding = UDim.new(0,8)
+
+		-- State
+		local Window = {}
+		Window._tabs = {}
+		Window._activeTab = nil
+		Window.Gui = gui
+		Window.Main = main
+		Window.Top = top
+		Window.TabBar = tabBar
+		Window.Content = contentScroll
+		Window.Config = config
+
+		-- Toggle UI
+		local visible = true
+		local function toggleUI()
+			visible = not visible
+			gui.Enabled = visible
+			toggleBtn.Text = visible and "Hide" or "Show"
+		end
+		toggleBtn.MouseButton1Click:Connect(toggleUI)
+		UserInput.InputBegan:Connect(function(inp, gp)
+			if gp then return end
+			if inp.KeyCode.Name == tostring(keybind) then
+				toggleUI()
+			end
+		end)
+
+		-- CreateTab
+		function Window:CreateTab(name, image)
+			local Tab = {}
+			Tab.Name = name or "Tab"
+			Tab._frame = new("Frame", {
+				Parent = self.TabBar,
+				Size = UDim2.new(0, 86, 1, 0),
+				BackgroundTransparency = 1,
+			})
+			local b = new("TextButton", {
+				Parent = Tab._frame,
+				Size = UDim2.new(1,0,1,0),
+				BackgroundColor3 = Color3.fromRGB(50,50,50),
+				Text = name,
+				TextColor3 = THEME.Text,
+				Font = Enum.Font.SourceSansSemibold,
+				TextSize = 14,
+			})
+			makeCorner(b, 8)
+
+			-- content container for this tab (a frame that will be parented to content when active)
+			local container = new("Frame", {
+				Size = UDim2.new(1,0,0,0),
+				BackgroundTransparency = 1,
+			})
+			local containerScroll = new("Frame", {
+				Parent = container,
+				Size = UDim2.new(1,0,1,0),
+				BackgroundTransparency = 1,
+			})
+			local vLayout = new("UIListLayout", {Parent = containerScroll})
+			vLayout.Padding = UDim.new(0,8)
+			vLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+			-- activation
+			b.MouseButton1Click:Connect(function()
+				-- clear content area then put this container
+				for _, c in pairs(self.Content:GetChildren()) do
+					if not (c:IsA("UIListLayout") or c:IsA("UITextSizeConstraint")) then
+						c:Destroy()
+					end
+				end
+				-- clone container children into Content (we'll parent a copy to keep original)
+				for _, child in ipairs(containerScroll:GetChildren()) do
+					if child:IsA("GuiObject") then
+						child.Parent = self.Content
+					end
+				end
+				self._activeTab = Tab
+			end)
+
+			-- Tab API funcs
+			function Tab:CreateLabel(text)
+				local lbl = new("TextLabel", {
+					Parent = containerScroll,
+					Size = UDim2.new(1, -10, 0, 20),
+					BackgroundTransparency = 1,
+					Text = text or "",
+					TextColor3 = THEME.SubText,
+					Font = Enum.Font.SourceSans,
+					TextSize = 14,
+					TextWrapped = true,
+					TextXAlignment = Enum.TextXAlignment.Left,
+				})
+				makeCorner(lbl, 6)
+				return lbl
+			end
+
+			function Tab:CreateButton(text, callback)
+				local btn = new("TextButton", {
+					Parent = containerScroll,
+					Size = UDim2.new(1, -10, 0, 36),
+					Text = text or "Button",
+					BackgroundColor3 = THEME.Accent,
+					TextColor3 = Color3.fromRGB(0,0,0),
+					Font = Enum.Font.SourceSansBold,
+					TextSize = 15,
+				})
+				makeCorner(btn, 8)
+				btn.MouseButton1Click:Connect(function()
+					pcall(function() if callback then callback() end end)
+				end)
+				return btn
+			end
+
+			function Tab:CreateToggle(text, default, callback)
+				local holder = new("Frame", {
+					Parent = containerScroll,
+					Size = UDim2.new(1, -10, 0, 36),
+					BackgroundTransparency = 1,
+				})
+				local label = new("TextLabel", {
+					Parent = holder,
+					Size = UDim2.new(0.78, 0, 1, 0),
+					BackgroundTransparency = 1,
+					Text = text or "Toggle",
+					TextColor3 = THEME.Text,
+					Font = Enum.Font.SourceSans,
+					TextSize = 15,
+					TextXAlignment = Enum.TextXAlignment.Left,
+				})
+				local toggleBtn = new("TextButton", {
+					Parent = holder,
+					Size = UDim2.new(0.18, 0, 0.7, 0),
+					Position = UDim2.new(0.82, 0, 0.15, 0),
+					BackgroundColor3 = default and THEME.Accent or Color3.fromRGB(80,80,80),
+					Text = "",
+				})
+				makeCorner(toggleBtn, 8)
+				local state = default or false
+				toggleBtn.MouseButton1Click:Connect(function()
+					state = not state
+					toggleBtn.BackgroundColor3 = state and THEME.Accent or Color3.fromRGB(80,80,80)
+					pcall(function() if callback then callback(state) end end)
+				end)
+				return {
+					Set = function(v) state = v; toggleBtn.BackgroundColor3 = state and THEME.Accent or Color3.fromRGB(80,80,80) end,
+					Get = function() return state end
+				}
+			end
+
+			function Tab:CreateTextbox(text, placeholder, callback)
+				local holder = new("Frame", {
+					Parent = containerScroll,
+					Size = UDim2.new(1, -10, 0, 40),
+					BackgroundTransparency = 1,
+				})
+				local label = new("TextLabel", {
+					Parent = holder,
+					Size = UDim2.new(1, -8, 0, 12),
+					Position = UDim2.new(0,4,0,0),
+					BackgroundTransparency = 1,
+					Text = text or "Input",
+					TextSize = 13,
+					TextColor3 = THEME.SubText,
+					Font = Enum.Font.SourceSans,
+					TextXAlignment = Enum.TextXAlignment.Left,
+				})
+				local box = new("TextBox", {
+					Parent = holder,
+					Size = UDim2.new(1, -8, 0, 24),
+					Position = UDim2.new(0,4,0,14),
+					Text = "",
+					TextColor3 = THEME.Text,
+					PlaceholderText = placeholder or "",
+					BackgroundColor3 = Color3.fromRGB(50,50,50),
+				})
+				makeCorner(box, 6)
+				box.FocusLost:Connect(function(enter)
+					if enter then
+						pcall(function() if callback then callback(box.Text) end end)
+					end
+				end)
+				return box
+			end
+
+			function Tab:CreateSlider(text, min, max, default, callback)
+				min = min or 0; max = max or 100; default = default or min
+				local holder = new("Frame", {
+					Parent = containerScroll,
+					Size = UDim2.new(1, -10, 0, 48),
+					BackgroundTransparency = 1,
+				})
+				local label = new("TextLabel", {
+					Parent = holder,
+					Size = UDim2.new(1, -8, 0, 14),
+					Position = UDim2.new(0,4,0,0),
+					BackgroundTransparency = 1,
+					Text = text or "Slider",
+					TextSize = 13,
+					TextColor3 = THEME.SubText,
+					Font = Enum.Font.SourceSans,
+					TextXAlignment = Enum.TextXAlignment.Left,
+				})
+				local sliderBg = new("Frame", {
+					Parent = holder,
+					Size = UDim2.new(1, -12, 0, 18),
+					Position = UDim2.new(0,6,0,18),
+					BackgroundColor3 = Color3.fromRGB(60,60,60),
+				})
+				makeCorner(sliderBg, 8)
+				local fill = new("Frame", {
+					Parent = sliderBg,
+					Size = UDim2.new((default - min)/(max - min), 0, 1, 0),
+					BackgroundColor3 = THEME.Accent,
+				})
+				makeCorner(fill, 8)
+				local knob = new("TextButton", {
+					Parent = sliderBg,
+					Size = UDim2.new(0, 14, 0, 14),
+					Position = UDim2.new((default - min)/(max - min), -7, 0, 2),
+					BackgroundColor3 = Color3.fromRGB(230,230,230),
+					Text = "",
+				})
+				makeCorner(knob, 8)
+
+				local dragging = false
+				knob.InputBegan:Connect(function(ip)
+					if ip.UserInputType == Enum.UserInputType.MouseButton1 or ip.UserInputType == Enum.UserInputType.Touch then
+						dragging = true
+					end
+				end)
+				UserInput.InputEnded:Connect(function(ip)
+					if ip.UserInputType == Enum.UserInputType.MouseButton1 or ip.UserInputType == Enum.UserInputType.Touch then
+						dragging = false
+					end
+				end)
+				UserInput.InputChanged:Connect(function(ip)
+					if dragging and ip.UserInputType == Enum.UserInputType.MouseMovement then
+						local abs = ip.Position.X
+						local bgPos = sliderBg.AbsolutePosition.X
+						local bgSize = sliderBg.AbsoluteSize.X
+						local rel = math.clamp((abs - bgPos)/bgSize, 0, 1)
+						fill.Size = UDim2.new(rel,0,1,0)
+						knob.Position = UDim2.new(rel, -7, 0, 2)
+						local value = min + (max-min) * rel
+						pcall(function() if callback then callback(value) end end)
+					end
+				end)
+				-- also allow clicking the background to set
+				sliderBg.InputBegan:Connect(function(ip)
+					if ip.UserInputType == Enum.UserInputType.MouseButton1 or ip.UserInputType == Enum.UserInputType.Touch then
+						local rel = math.clamp((ip.Position.X - sliderBg.AbsolutePosition.X)/sliderBg.AbsoluteSize.X, 0, 1)
+						fill.Size = UDim2.new(rel,0,1,0)
+						knob.Position = UDim2.new(rel, -7, 0, 2)
+						local value = min + (max-min) * rel
+						pcall(function() if callback then callback(value) end end)
+					end
+				end)
+				return {
+					Set = function(v)
+						local rel = math.clamp((v - min)/(max - min), 0, 1)
+						fill.Size = UDim2.new(rel,0,1,0)
+						knob.Position = UDim2.new(rel, -7, 0, 2)
+					end
+				}
+			end
+
+			-- finalize
+			table.insert(self._tabs, Tab)
+			Tab._container = containerScroll
+			return Tab
+		end
+
+		-- finish: return window API
+		setmetatable(Window, {__index = Library})
+		return Window
+	end
+
+	-- top-level API: CreateWindow shortcut
+	return setmetatable({}, {
+		__call = function(_, ...) return Library:CreateWindow(...) end,
+		__index = Library,
+		CreateWindow = function(_, ...) return Library:CreateWindow(...) end
+	})
+end)()
